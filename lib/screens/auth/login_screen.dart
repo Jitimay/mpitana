@@ -115,12 +115,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/burundi_landscape.jpg'),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -187,12 +181,6 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ],
                         ),
-                      ),
-                      Spacer(),
-                      Icon(
-                        Icons.menu,
-                        color: Theme.of(context).colorScheme.onBackground,
-                        size: 28,
                       ),
                     ],
                   ),

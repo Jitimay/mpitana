@@ -167,7 +167,7 @@ class MainContent extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-                child: Text('Offer ride in loat Burundi', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onPrimary)), // Use onPrimary color
+                child: Text('Offer ride in loat Burundi', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onPrimary)),
               ),
             ),
           ),
