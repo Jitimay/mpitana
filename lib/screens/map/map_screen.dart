@@ -3,9 +3,17 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:async'; // Import for TimeoutException
+import 'package:geocoding/geocoding.dart';
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({super.key});
+  final String? departure;
+  final String? destination;
+
+  const MapScreen({
+    super.key,
+    this.departure,
+    this.destination,
+  });
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -16,6 +24,8 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
   Position? _currentPosition;
   bool _isLoadingLocation = true;
   String? _errorMessage;
+  LatLng? _departureLatLng;
+  LatLng? _destinationLatLng;
 
   // Initial camera position set to Bujumbura, Burundi as a fallback
   final CameraPosition _initialCameraPosition = const CameraPosition(
@@ -28,6 +38,7 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this); // Add observer
     _requestLocationPermissionAndGetLocation();
+    _geocodeAddresses();
   }
 
   @override
@@ -224,6 +235,52 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
     }
   }
 
+  Future<void> _geocodeAddresses() async {
+    try {
+      if (widget.departure != null && widget.departure!.isNotEmpty) {
+        List<Location> locations = await locationFromAddress(widget.departure!);
+        if (locations.isNotEmpty) {
+          setState(() {
+            _departureLatLng = LatLng(locations.first.latitude, locations.first.longitude);
+          });
+        }
+      }
+      if (widget.destination != null && widget.destination!.isNotEmpty) {
+        List<Location> locations = await locationFromAddress(widget.destination!);
+        if (locations.isNotEmpty) {
+          setState(() {
+            _destinationLatLng = LatLng(locations.first.latitude, locations.first.longitude);
+          });
+        }
+      }
+      _updateCameraToBounds();
+    } catch (e) {
+      debugPrint("Error geocoding addresses: $e");
+    }
+  }
+
+  void _updateCameraToBounds() {
+    if (_mapController != null && _departureLatLng != null && _destinationLatLng != null) {
+      LatLngBounds bounds;
+      if (_departureLatLng!.latitude > _destinationLatLng!.latitude) {
+        bounds = LatLngBounds(
+          southwest: _destinationLatLng!,
+          northeast: _departureLatLng!,
+        );
+      } else {
+        bounds = LatLngBounds(
+          southwest: _departureLatLng!,
+          northeast: _destinationLatLng!,
+        );
+      }
+      _mapController!.animateCamera(CameraUpdate.newLatLngBounds(bounds, 50.0));
+    } else if (_mapController != null && _departureLatLng != null) {
+      _mapController!.animateCamera(CameraUpdate.newLatLng(_departureLatLng!));
+    } else if (_mapController != null && _destinationLatLng != null) {
+      _mapController!.animateCamera(CameraUpdate.newLatLng(_destinationLatLng!));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -233,7 +290,6 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
             onMapCreated: (GoogleMapController controller) {
               debugPrint("Map created");
               _mapController = controller;
-              // If we already have the location, animate to it
               if (_currentPosition != null) {
                 _mapController!.animateCamera(
                   CameraUpdate.newCameraPosition(
@@ -243,6 +299,8 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
                     ),
                   ),
                 );
+              } else if (_departureLatLng != null || _destinationLatLng != null) {
+                _updateCameraToBounds();
               }
             },
             initialCameraPosition: _currentPosition != null
@@ -253,15 +311,28 @@ class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
                 : _initialCameraPosition,
             myLocationEnabled: _currentPosition != null, // Only enable if we have permission
             myLocationButtonEnabled: _currentPosition != null,
-            markers: _currentPosition != null
-                ? {
-                    Marker(
-                      markerId: const MarkerId('currentLocation'),
-                      position: LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
-                      infoWindow: const InfoWindow(title: 'Your Location'),
-                    ),
-                  }
-                : {},
+            markers: Set<Marker>.of([
+              if (_currentPosition != null)
+                Marker(
+                  markerId: const MarkerId('currentLocation'),
+                  position: LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
+                  infoWindow: const InfoWindow(title: 'Your Location'),
+                ),
+              if (_departureLatLng != null)
+                Marker(
+                  markerId: const MarkerId('departureLocation'),
+                  position: _departureLatLng!,
+                  infoWindow: const InfoWindow(title: 'Departure'),
+                  icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+                ),
+              if (_destinationLatLng != null)
+                Marker(
+                  markerId: const MarkerId('destinationLocation'),
+                  position: _destinationLatLng!,
+                  infoWindow: const InfoWindow(title: 'Destination'),
+                  icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),
+                ),
+            ]),
           ),
           // Show loading indicator
           if (_isLoadingLocation)

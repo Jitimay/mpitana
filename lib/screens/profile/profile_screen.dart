@@ -320,13 +320,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Switch(
                             value: Theme.of(context).brightness == Brightness.dark,
                             onChanged: (value) {
-                              // This will require MyApp.of(context) to be accessible
-                              // from ProfileScreen, which means MyApp needs to expose
-                              // a method to toggle theme. For now, it will be a placeholder.
-                              // You will need to import main.dart and pass context appropriately.
-                              // For simplicity, directly accessing MyApp for now.
-                              // This assumes MyApp is a StatefulWidget and its State
-                              // exposes a toggleTheme method.
                               if (value) {
                                 MyApp.of(context)?.toggleTheme(ThemeMode.dark);
                               } else {

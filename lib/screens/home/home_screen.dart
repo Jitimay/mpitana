@@ -21,16 +21,22 @@ class _HomeScreenState extends State<HomeScreen> {
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
   late TextEditingController _dateTimeController;
+  late TextEditingController _departureController;
+  late TextEditingController _destinationController;
 
   @override
   void initState() {
     super.initState();
     _dateTimeController = TextEditingController();
+    _departureController = TextEditingController();
+    _destinationController = TextEditingController();
   }
 
   @override
   void dispose() {
     _dateTimeController.dispose();
+    _departureController.dispose();
+    _destinationController.dispose();
     super.dispose();
   }
 
@@ -96,6 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       children: [
                         TextField(
+                          controller: _departureController,
                           decoration: InputDecoration(
                             hintText: 'Departure',
                             hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)), // Added hintStyle
@@ -111,6 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 15),
                         TextField(
+                          controller: _destinationController,
                           decoration: InputDecoration(
                             hintText: 'Destination',
                             hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)), // Added hintStyle
@@ -188,7 +196,17 @@ class _HomeScreenState extends State<HomeScreen> {
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MapScreen(
+                        departure: _departureController.text,
+                        destination: _destinationController.text,
+                      ),
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary, // Use primary color from theme
                   padding: const EdgeInsets.symmetric(vertical: 15),
@@ -206,7 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 300,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: MapScreen(),
+              child: MapScreen(departure: _departureController.text, destination: _destinationController.text,),
           ),
           )
         ],
