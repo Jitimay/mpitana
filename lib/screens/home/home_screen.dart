@@ -20,8 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
     const FindRideScreen(),
     const OfferRideScreen(),
     const SettingsScreen(), // Use SettingsScreen for the center button
-    const ProfileScreen(),
     const MapScreen(),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -49,14 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.settings), // Changed to settings icon
             label: 'Settings', // Changed label to Settings
           ),
+                    BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Map',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Map',
-          ),
+
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Theme.of(context).colorScheme.primary, // Use primary color from theme

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:mpitana/screens/home/home_screen.dart';
-import 'package:mpitana/common/utils/colors.dart'; // Import the new colors file
+import 'package:mpitana/common/utils/colors.dart';
+import 'package:mpitana/screens/auth/login_screen.dart'; // Import the new colors file
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   static _MyAppState? of(BuildContext context) => context.findAncestorStateOfType<_MyAppState>();
 
   @override
@@ -25,7 +27,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      home: LoginPage(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: lightColorScheme,

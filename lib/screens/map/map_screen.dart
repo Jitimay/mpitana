@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'dart:async'; // Import for TimeoutException
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -10,7 +11,7 @@ class MapScreen extends StatefulWidget {
   State<MapScreen> createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> {
+class _MapScreenState extends State<MapScreen> with WidgetsBindingObserver {
   GoogleMapController? _mapController;
   Position? _currentPosition;
   bool _isLoadingLocation = true;
@@ -25,13 +26,35 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this); // Add observer
     _requestLocationPermissionAndGetLocation();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this); // Remove observer
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _requestLocationPermissionAndGetLocation(); // Re-check on resume
+    }
   }
 
   Future<void> _requestLocationPermissionAndGetLocation() async {
     try {
       debugPrint("Requesting location permission...");
       
+      // Check if location services are enabled first
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        _showLocationServiceDialog(); // Prompt to enable location services
+        _handleLocationError('Location services are disabled. Please enable them in your device settings.');
+        return;
+      }
+
       // Request location permission
       PermissionStatus permissionStatus = await Permission.location.request();
       
@@ -64,6 +87,7 @@ class _MapScreenState extends State<MapScreen> {
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
         _handleLocationError('Location services are disabled. Please enable them in your device settings.');
+        _showLocationServiceDialog(); // Show dialog if service is disabled
         return;
       }
 
@@ -98,7 +122,11 @@ class _MapScreenState extends State<MapScreen> {
       }
     } catch (e) {
       debugPrint("Error getting location: $e");
-      _handleLocationError('Failed to get location: ${e.toString()}');
+      if (e is TimeoutException) {
+        _handleLocationError('Failed to get location within the time limit. Please check your network connection and GPS signal, and try again.');
+      } else {
+        _handleLocationError('Failed to get location: ${e.toString()}');
+      }
     }
   }
 
@@ -116,6 +144,33 @@ class _MapScreenState extends State<MapScreen> {
         ),
       );
     }
+  }
+
+  void _showLocationServiceDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Enable Location Services'),
+          content: const Text(
+            'Location services are disabled on your device. Please enable them to allow the app to access your location.',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await Geolocator.openLocationSettings();
+              },
+              child: const Text('Open Location Settings'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _showSettingsDialog() {
@@ -151,7 +206,15 @@ class _MapScreenState extends State<MapScreen> {
       _errorMessage = null;
     });
     
-    // Check permission status first
+    // Check if location services are enabled first
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      _showLocationServiceDialog(); // Prompt to enable location services
+      _handleLocationError('Location services are disabled. Please enable them in your device settings.');
+      return;
+    }
+
+    // Check permission status
     PermissionStatus status = await Permission.location.status;
     
     if (status == PermissionStatus.granted) {
