@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mpitana/bloc/ride/ride_bloc.dart';
 import 'package:mpitana/common/utils/colors.dart';
-import 'package:mpitana/screens/auth/login_screen.dart'; // Import the new colors file
+import 'package:mpitana/screens/auth/login_screen.dart';
+import 'package:mpitana/bloc/app_bloc_observer.dart';
 
 void main() {
-  runApp(MyApp());
+  Bloc.observer = AppBlocObserver();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -26,16 +30,24 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage(),
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: lightColorScheme,
-      ), // Light theme
-      darkTheme: ThemeData(
-        colorScheme: darkColorScheme,
-      ), // Dark theme
-      themeMode: _themeMode, // Use the current theme mode
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<RideBloc>(
+          create: (context) => RideBloc(),
+        ),
+        // Add other BlocProviders here as needed
+      ],
+      child: MaterialApp(
+        home: LoginPage(),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: lightColorScheme,
+        ), // Light theme
+        darkTheme: ThemeData(
+          colorScheme: darkColorScheme,
+        ), // Dark theme
+        themeMode: _themeMode, // Use the current theme mode
+      ),
     );
   }
 }
