@@ -231,46 +231,97 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
             )
           : _widgetOptions[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.directions_car_filled), // Changed to a more ride-related icon
-            label: 'Find Ride', // Changed label to Rides
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              // ignore: deprecated_member_use
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 15,
+              offset: const Offset(0, -10),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_road),
-            label: 'Offer Ride',
+          child: BottomNavigationBar(
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(_selectedIndex == 0 ? Icons.directions_car_filled : Icons.directions_car_outlined),
+                label: 'Find Ride',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(_selectedIndex == 1 ? Icons.add_circle : Icons.add_circle_outline),
+                label: 'Offer Ride',
+              ),
+              BottomNavigationBarItem(
+                icon: const SizedBox(width: 0), // Empty space for FAB
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(_selectedIndex == 3 ? Icons.chat_bubble : Icons.chat_bubble_outline),
+                label: 'Messages',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(_selectedIndex == 4 ? Icons.person : Icons.person_outline),
+                label: 'Profile',
+              ),
+            ],
+            currentIndex: _selectedIndex == 2 ? 0 : _selectedIndex, // Handle the empty middle item
+            selectedItemColor: Theme.of(context).colorScheme.primary,
+            unselectedItemColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+            onTap: (index) {
+              // Skip the middle item (index 2) as it's reserved for the FAB
+              if (index == 2) return;
+              
+              // Adjust index if it's greater than 2 (after the FAB)
+              _onItemTapped(index);
+            },
+            type: BottomNavigationBarType.fixed,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            elevation: 0, // Remove default shadow
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.directions_car), 
-            label: 'Rides',
-          ),
-                    BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: 'Messages',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Theme.of(context).colorScheme.primary, // Use primary color from theme
-        unselectedItemColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6), // Use onSurface with opacity
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        backgroundColor: Theme.of(context).colorScheme.surface, // Use surface color from theme
+        ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-         // Action for the center button
-          _onItemTapped(2); // Navigate to RidesScreen when the FAB is pressed
-        },
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        child: Icon(Icons.directions_car_filled, color: Theme.of(context).colorScheme.onPrimary), // Changed to rides icon and use onPrimary color
+      floatingActionButton: Container(
+        height: 65,
+        width: 65,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Theme.of(context).colorScheme.primary,
+              Theme.of(context).colorScheme.secondary,
+            ],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+              spreadRadius: 1,
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: FloatingActionButton(
+          onPressed: () {
+            _onItemTapped(2); // Navigate to RidesScreen when the FAB is pressed
+          },
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          child: Icon(
+            Icons.directions_car_filled,
+            color: Theme.of(context).colorScheme.onPrimary,
+            size: 30,
+          ),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

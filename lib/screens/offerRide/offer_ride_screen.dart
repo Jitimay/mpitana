@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart' hide Location; // Hide the geocoding Location class
 import 'package:mpitana/screens/offerRide/location_picker_screen.dart';
-import 'package:mpitana/screens/offerRide/models/location.dart' as MyLocation; 
+import 'package:mpitana/screens/offerRide/models/location.dart' as MyLocation; // Use alias
 import 'package:mpitana/screens/offerRide/services/location_service.dart';
 
 class OfferRideScreen extends StatefulWidget {
