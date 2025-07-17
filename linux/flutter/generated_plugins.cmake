@@ -3,7 +3,8 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  isar_flutter_libs
+  file_selector_linux
+  objectbox_flutter_libs
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

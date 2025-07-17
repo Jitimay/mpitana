@@ -1,10 +1,9 @@
-import 'package:isar/isar.dart';
+import 'package:objectbox/objectbox.dart';
 
-part 'location.g.dart';
-
-@collection
+@Entity()
 class Location {
-  Id id = Isar.autoIncrement;
+  @Id()
+  int id = 0;
   
   // Coordinates
   late double latitude;
@@ -20,6 +19,7 @@ class Location {
   
   // Timestamp
   @Index()
+  @Property(type: PropertyType.date)
   late DateTime createdAt;
   
   // Default constructor

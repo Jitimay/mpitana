@@ -1,10 +1,9 @@
-import 'package:isar/isar.dart';
+import 'package:objectbox/objectbox.dart';
 
-part 'ride_offer.g.dart';
-
-@collection
+@Entity()
 class RideOffer {
-  Id id = Isar.autoIncrement;
+  @Id()
+  int id = 0;
 
   // Location properties
   late double departureLat;
@@ -17,6 +16,7 @@ class RideOffer {
   late String to;
   
   @Index()
+  @Property(type: PropertyType.date)
   late DateTime dateTime;
   
   late int availableSeats;
@@ -24,6 +24,7 @@ class RideOffer {
   late String description;
   
   @Index()
+  @Property(type: PropertyType.date)
   late DateTime createdAt;
   
   // Optional properties

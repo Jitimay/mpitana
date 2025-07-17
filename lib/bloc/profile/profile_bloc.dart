@@ -1,9 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mpitana/common/database/objectbox_db.dart';
+import 'package:mpitana/screens/profile/models/user_profile.dart';
 import 'profile_event.dart';
 import 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  UserProfile? _currentProfile;
+  BlocUserProfile? _currentProfile;
+  String _currentUserId = "current_user"; // This would come from auth service in a real app
 
   ProfileBloc() : super(ProfileInitial()) {
     on<LoadProfileEvent>(_onLoadProfile);
@@ -18,30 +21,37 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoading());
     
     try {
-      // Simulate API call delay
-      await Future.delayed(const Duration(seconds: 1));
+      // Load profile from database
+      final dbProfile = await ObjectBoxDb.getUserProfileByUserId(_currentUserId);
       
-      // TODO: Replace with actual API call to load user profile
-      if (_currentProfile == null) {
-        _currentProfile = UserProfile(
-          id: '123',
+      if (dbProfile != null) {
+        // Convert to BLoC model
+        _currentProfile = dbProfile.toBloc();
+        emit(ProfileLoaded(profile: _currentProfile!));
+      } else {
+        // Create default profile if none exists
+        final defaultProfile = UserProfile(
+          userId: _currentUserId,
           name: 'John Doe',
           email: 'john.doe@example.com',
           phone: '+1234567890',
           bio: 'Love carpooling and meeting new people!',
-          createdAt: DateTime.now().subtract(const Duration(days: 30)),
-          ridesOffered: 15,
-          ridesTaken: 8,
-          rating: 4.5,
-          notificationSettings: NotificationSettings(
-            rideNotifications: true,
-            chatNotifications: true,
-            emailNotifications: false,
-          ),
+          createdAt: DateTime.now(),
+          ridesOffered: 0,
+          ridesTaken: 0,
+          rating: 0.0,
+          rideNotifications: true,
+          chatNotifications: true,
+          emailNotifications: false,
         );
+        
+        // Save to database
+        await ObjectBoxDb.saveUserProfile(defaultProfile);
+        
+        // Convert to BLoC model
+        _currentProfile = defaultProfile.toBloc();
+        emit(ProfileLoaded(profile: _currentProfile!));
       }
-      
-      emit(ProfileLoaded(profile: _currentProfile!));
     } catch (e) {
       emit(ProfileError(message: 'Failed to load profile: ${e.toString()}'));
     }
@@ -51,18 +61,24 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoading());
     
     try {
-      // Simulate API call delay
-      await Future.delayed(const Duration(seconds: 2));
+      // Get current profile from database
+      final dbProfile = await ObjectBoxDb.getUserProfileByUserId(_currentUserId);
       
-      // TODO: Replace with actual API call to update profile
-      if (_currentProfile != null) {
-        _currentProfile = _currentProfile!.copyWith(
+      if (dbProfile != null) {
+        // Update profile
+        final updatedProfile = dbProfile.copyWith(
           name: event.name,
           email: event.email,
           phone: event.phone,
           bio: event.bio,
           profileImageUrl: event.profileImagePath,
         );
+        
+        // Save to database
+        await ObjectBoxDb.saveUserProfile(updatedProfile);
+        
+        // Update current profile
+        _currentProfile = updatedProfile.toBloc();
         
         emit(ProfileUpdated(
           profile: _currentProfile!,
@@ -80,14 +96,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoading());
     
     try {
-      // Simulate API call delay
-      await Future.delayed(const Duration(seconds: 1));
+      // Get current profile from database
+      final dbProfile = await ObjectBoxDb.getUserProfileByUserId(_currentUserId);
       
-      // TODO: Replace with actual API call to upload image
-      if (_currentProfile != null) {
-        _currentProfile = _currentProfile!.copyWith(
+      if (dbProfile != null) {
+        // Update profile image
+        final updatedProfile = dbProfile.copyWith(
           profileImageUrl: event.imagePath,
         );
+        
+        // Save to database
+        await ObjectBoxDb.saveUserProfile(updatedProfile);
+        
+        // Update current profile
+        _currentProfile = updatedProfile.toBloc();
         
         emit(ProfileImageUpdated(imagePath: event.imagePath));
         emit(ProfileLoaded(profile: _currentProfile!));
@@ -106,19 +128,27 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoading());
     
     try {
-      // Simulate API call delay
-      await Future.delayed(const Duration(seconds: 1));
+      // Get current profile from database
+      final dbProfile = await ObjectBoxDb.getUserProfileByUserId(_currentUserId);
       
-      // TODO: Replace with actual API call to update notification settings
-      if (_currentProfile != null) {
-        final newSettings = NotificationSettings(
+      if (dbProfile != null) {
+        // Update notification settings
+        final updatedProfile = dbProfile.copyWith(
           rideNotifications: event.rideNotifications,
           chatNotifications: event.chatNotifications,
           emailNotifications: event.emailNotifications,
         );
         
-        _currentProfile = _currentProfile!.copyWith(
-          notificationSettings: newSettings,
+        // Save to database
+        await ObjectBoxDb.saveUserProfile(updatedProfile);
+        
+        // Update current profile
+        _currentProfile = updatedProfile.toBloc();
+        
+        final newSettings = NotificationSettings(
+          rideNotifications: event.rideNotifications,
+          chatNotifications: event.chatNotifications,
+          emailNotifications: event.emailNotifications,
         );
         
         emit(NotificationSettingsUpdated(settings: newSettings));
@@ -135,11 +165,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoading());
     
     try {
-      // Simulate API call delay
-      await Future.delayed(const Duration(seconds: 2));
-      
-      // TODO: Replace with actual API call to change password
-      // Validate current password and update with new password
+      // In a real app, this would call an authentication service
+      // For now, we'll just simulate a successful password change
+      await Future.delayed(const Duration(seconds: 1));
       
       emit(PasswordChanged(message: 'Password changed successfully!'));
       
@@ -155,11 +183,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoading());
     
     try {
-      // Simulate API call delay
-      await Future.delayed(const Duration(seconds: 2));
+      // Delete profile from database
+      await ObjectBoxDb.deleteUserProfileByUserId(_currentUserId);
       
-      // TODO: Replace with actual API call to delete account
-      // This should also clear all user data
+      // In a real app, this would also delete the user from authentication service
       
       _currentProfile = null;
       emit(AccountDeleted());

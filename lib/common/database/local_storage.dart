@@ -1,14 +1,15 @@
 import 'package:flutter/foundation.dart';
-import 'package:mpitana/common/database/objectbox_db.dart';
 import 'package:mpitana/screens/offerRide/models/location.dart';
+import 'package:mpitana/common/database/objectbox_db.dart';
 
-class LocationService {
-  static Future<int> saveLocation(Location location) async {
+/// Local storage implementation using ObjectBox
+class LocalStorage {
+  
+  static Future<void> saveLocation(Location location) async {
     try {
-      return await ObjectBoxDb.saveLocation(location);
+      await ObjectBoxDb.saveLocation(location);
     } catch (e) {
       debugPrint('Error saving location: $e');
-      return -1;
     }
   }
   
@@ -25,32 +26,33 @@ class LocationService {
       // Sort by createdAt (most recent first)
       locations.sort((a, b) => b.createdAt.compareTo(a.createdAt));
       
-      // Limit results
+      // Limit to 5 or 10 items
       if (locations.length > (isDeparture != null ? 5 : 10)) {
         locations = locations.sublist(0, isDeparture != null ? 5 : 10);
       }
       
       return locations;
     } catch (e) {
-      debugPrint('Error getting recent locations: $e');
+      debugPrint('Error getting locations: $e');
       return [];
     }
   }
   
-  static Future<void> deleteLocation(int id) async {
+  static Future<bool> deleteLocation(int id) async {
     try {
-      await ObjectBoxDb.deleteLocation(id);
+      return await ObjectBoxDb.deleteLocation(id);
     } catch (e) {
       debugPrint('Error deleting location: $e');
+      return false;
     }
   }
   
-  static Future<void> clearAllLocations() async {
+  static Future<List<Location>> getAllLocations() async {
     try {
-      final box = await ObjectBoxDb.locationBox;
-      box.removeAll();
+      return await ObjectBoxDb.getAllLocations();
     } catch (e) {
-      debugPrint('Error clearing locations: $e');
+      debugPrint('Error getting all locations: $e');
+      return [];
     }
   }
 }

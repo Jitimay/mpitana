@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mpitana/screens/chat/chat_list_item.dart';
 import 'package:mpitana/screens/chat/models/chat_model.dart';
+import 'package:mpitana/screens/chat/chatbot/chatbot_screen.dart';
+
 class MessagesScreen extends StatelessWidget {
   final List<ChatItem> chatItems = [
     ChatItem(
@@ -45,11 +47,11 @@ class MessagesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1C1C1E),
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Column(
           children: [
-            _buildHeader(),
+            _buildHeader(context),
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.zero,
@@ -62,29 +64,60 @@ class MessagesScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ChatbotScreen(),
+            ),
+          );
+        },
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: Icon(
+          Icons.smart_toy,
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
+      ),
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surface,
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).shadowColor.withOpacity(0.1),
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
       child: Row(
         children: [
           Text(
             "Messages",
             style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.onSurface,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
           Spacer(),
           IconButton(
-            icon: Icon(Icons.search, color: Colors.white),
+            icon: Icon(
+              Icons.search,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.add, color: Colors.white),
+            icon: Icon(
+              Icons.add,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
             onPressed: () {},
           ),
         ],

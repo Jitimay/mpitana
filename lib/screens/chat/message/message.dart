@@ -45,15 +45,25 @@ class MessageBubble extends StatelessWidget {
                     color: message.isMe ? Color(0xFF34C759) : Color(0xFF2C2C2E),
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  child: message.isVoiceMessage
-                      ? _buildVoiceMessage()
-                      : Text(
-                          message.text,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
+                  child: Column(
+                    crossAxisAlignment: message.isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                    children: [
+                      message.isVoiceMessage
+                          ? _buildVoiceMessage()
+                          : Text(
+                              message.text,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
+                      if (!message.isMe && !message.isVoiceMessage && message.text.isNotEmpty)
+                        Padding(
+                          padding: EdgeInsets.only(top: 8),
+                          child: _buildChatBotButton(),
                         ),
+                    ],
+                  ),
                 ),
                 SizedBox(height: 4),
                 Text(
@@ -105,6 +115,30 @@ class MessageBubble extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+  
+  Widget _buildChatBotButton() {
+    return InkWell(
+      onTap: () {
+        // Add your chat bot functionality here
+        print("Chat bot button tapped");
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        decoration: BoxDecoration(
+          color: Color(0xFF007AFF),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Text(
+          "Ask AI",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
     );
   }
 }

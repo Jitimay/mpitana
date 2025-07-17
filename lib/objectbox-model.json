@@ -1,0 +1,248 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:7027434267507269485",
+      "lastPropertyId": "8:5098411677319176080",
+      "name": "Location",
+      "properties": [
+        {
+          "id": "1:4592894167065833675",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3799701622443345766",
+          "name": "latitude",
+          "type": 8
+        },
+        {
+          "id": "3:5582381950345498009",
+          "name": "longitude",
+          "type": 8
+        },
+        {
+          "id": "4:4099493474036263428",
+          "name": "address",
+          "type": 9
+        },
+        {
+          "id": "5:5603384658397001722",
+          "name": "city",
+          "type": 9
+        },
+        {
+          "id": "6:6365883484189651592",
+          "name": "country",
+          "type": 9
+        },
+        {
+          "id": "7:6689910268872050347",
+          "name": "isDeparture",
+          "type": 1
+        },
+        {
+          "id": "8:5098411677319176080",
+          "name": "createdAt",
+          "type": 10,
+          "flags": 8,
+          "indexId": "1:8375028642304164987"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:2952514429372149847",
+      "lastPropertyId": "16:5455907999534103885",
+      "name": "RideOffer",
+      "properties": [
+        {
+          "id": "1:2376060431977909024",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2336104575359050522",
+          "name": "departureLat",
+          "type": 8
+        },
+        {
+          "id": "3:255059376219021996",
+          "name": "departureLng",
+          "type": 8
+        },
+        {
+          "id": "4:3178864270068061554",
+          "name": "destinationLat",
+          "type": 8
+        },
+        {
+          "id": "5:1102553123676652503",
+          "name": "destinationLng",
+          "type": 8
+        },
+        {
+          "id": "6:4920240132591212075",
+          "name": "from",
+          "type": 9
+        },
+        {
+          "id": "7:9069432423137568416",
+          "name": "to",
+          "type": 9
+        },
+        {
+          "id": "8:5125072493044826262",
+          "name": "dateTime",
+          "type": 10,
+          "flags": 8,
+          "indexId": "2:6367058901361562702"
+        },
+        {
+          "id": "9:3466995751616172525",
+          "name": "availableSeats",
+          "type": 6
+        },
+        {
+          "id": "10:5340081576551149724",
+          "name": "price",
+          "type": 8
+        },
+        {
+          "id": "11:6534060171361344552",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "12:5820776593353759286",
+          "name": "createdAt",
+          "type": 10,
+          "flags": 8,
+          "indexId": "3:477297220318915487"
+        },
+        {
+          "id": "13:7392615715792204974",
+          "name": "driverName",
+          "type": 9
+        },
+        {
+          "id": "14:6491985399024281136",
+          "name": "driverId",
+          "type": 9
+        },
+        {
+          "id": "15:2179086017587896300",
+          "name": "vehicleInfo",
+          "type": 9
+        },
+        {
+          "id": "16:5455907999534103885",
+          "name": "isActive",
+          "type": 1,
+          "flags": 8,
+          "indexId": "4:682870673175232116"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:7015521020507013135",
+      "lastPropertyId": "15:4333117446053075055",
+      "name": "UserProfile",
+      "properties": [
+        {
+          "id": "1:6713263157646582868",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:915147883494439490",
+          "name": "userId",
+          "type": 9
+        },
+        {
+          "id": "3:5967573162891879223",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "4:207584510669086079",
+          "name": "email",
+          "type": 9
+        },
+        {
+          "id": "5:5829136283731079715",
+          "name": "phone",
+          "type": 9
+        },
+        {
+          "id": "6:8763408967394642617",
+          "name": "bio",
+          "type": 9
+        },
+        {
+          "id": "7:1676564742345896168",
+          "name": "profileImageUrl",
+          "type": 9
+        },
+        {
+          "id": "8:953472046321755433",
+          "name": "createdAtTimestamp",
+          "type": 6
+        },
+        {
+          "id": "9:372241672962909529",
+          "name": "ridesOffered",
+          "type": 6
+        },
+        {
+          "id": "10:2364796890377538354",
+          "name": "ridesTaken",
+          "type": 6
+        },
+        {
+          "id": "11:5248602872016811621",
+          "name": "rating",
+          "type": 8
+        },
+        {
+          "id": "12:3593465494061984158",
+          "name": "rideNotifications",
+          "type": 1
+        },
+        {
+          "id": "13:4320657127011586534",
+          "name": "chatNotifications",
+          "type": 1
+        },
+        {
+          "id": "14:3959828320454289423",
+          "name": "emailNotifications",
+          "type": 1
+        },
+        {
+          "id": "15:4333117446053075055",
+          "name": "createdAt",
+          "type": 10
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:7015521020507013135",
+  "lastIndexId": "4:682870673175232116",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

@@ -42,9 +42,16 @@ dependencies:
   flutter_bloc: ^9.1.1
   bloc_test: ^10.0.0
   hive: ^2.2.3
-  isar: ^3.1.0+1
-  isar_flutter_libs: ^3.1.0+1
+  objectbox: ^4.0.3
+  objectbox_flutter_libs: ^4.0.3
   path_provider: ^2.1.2
+  flutter_polyline_points: ^2.1.0
+  shared_preferences: ^2.5.3
+  video_player: ^2.8.2
+  http: ^1.2.0
+  flutter_typeahead: ^5.0.1
+  dio: ^5.8.0
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
@@ -57,7 +64,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
   build_runner: ^2.4.8
-  isar_generator: ^3.1.0+1
+  objectbox_generator: ^4.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

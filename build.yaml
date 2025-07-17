@@ -1,0 +1,6 @@
+targets:
+  $default:
+    builders:
+      objectbox_generator|objectbox_generator:
+        generate_for:
+          - lib/screens/offerRide/models/**.dart
