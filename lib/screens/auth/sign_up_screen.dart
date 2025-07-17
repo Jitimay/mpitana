@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mpitana/screens/auth/login_screen.dart';
 import 'package:mpitana/screens/home/home_screen.dart';
 
 class SignUpPage extends StatefulWidget {

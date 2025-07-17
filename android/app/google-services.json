@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "694953533006",
+    "project_id": "mpitana-547cb",
+    "storage_bucket": "mpitana-547cb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:694953533006:android:063c07d31a86bd1e912d1f",
+        "android_client_info": {
+          "package_name": "com.example.mpitana"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3PZ_kqK9cMI7wtmBJAU3G8KWvqTKDz_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
