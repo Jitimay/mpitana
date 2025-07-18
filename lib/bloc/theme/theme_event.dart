@@ -9,3 +9,5 @@ class ToggleThemeEvent extends ThemeEvent {
 }
 
 class SystemThemeEvent extends ThemeEvent {}
+
+class InitThemeEvent extends ThemeEvent {}

@@ -5,7 +5,7 @@ import 'package:mpitana/screens/chat/models/chat_model.dart';
 import 'package:mpitana/screens/findRideScreen/find_ride_screen.dart';
 import 'package:mpitana/screens/map/map_screen.dart';
 import 'package:mpitana/screens/offerRide/modern_offer_ride_screen.dart';
-import 'package:mpitana/screens/profile/enhanced_profile_screen.dart';
+import 'package:mpitana/screens/profile/profile_screen.dart';
 import 'package:mpitana/screens/rides/rides_screen.dart'; // Import the new rides screen
 
 
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const RidesScreen(),
     MessagesScreen(),
     // ChatScreen(chatItem: ChatItem(name: 'John Doe', lastMessage: 'Hello, how are you?', time: '12:00 PM', profileImage: 'https://i.ibb.co/6rP1gQ3/burundi-flag-logo.png')),
-    const EnhancedProfileScreen(),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
