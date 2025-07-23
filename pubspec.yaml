@@ -67,6 +67,12 @@ dev_dependencies:
   build_runner: ^2.4.8
   objectbox_generator: ^4.0.3
   flutter_native_splash: ^2.3.10
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "lib/assets/logo/logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -82,7 +88,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - lib/assets/logo/logo.png
-
+    - lib/assets/logo/logo_white.png
+    - lib/assets/logo/logo_dark.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

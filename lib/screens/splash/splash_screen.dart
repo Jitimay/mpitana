@@ -31,7 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             // Logo image
             Image.asset(
-              'lib/assets/logo/logo.png',
+              Theme.of(context).brightness == Brightness.dark
+                  ? 'lib/assets/logo/logo_white.png'
+                  : 'lib/assets/logo/logo_dark.png',
               width: 200,
               height: 200,
             ),

@@ -134,52 +134,19 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   padding: EdgeInsets.all(20),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 40,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Theme.of(context).colorScheme.error, // Represents red from the flag
-                              Theme.of(context).colorScheme.onPrimary, // Represents white from the flag
-                              Theme.of(context).colorScheme.surface, // Represents green from the flag, assuming surface can be green in the theme
-                            ],
-                          ),
-                        ),
-                        child: Center(
-                          child: Container(
-                            width: 20,
-                            height: 20,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Theme.of(context).colorScheme.onPrimary,
-                            ),
-                            child: Icon(
-                              Icons.star,
-                              color: Theme.of(context).colorScheme.error, // Red star
-                              size: 12,
-                            ),
-                          ),
-                        ),
-                      ),
                       SizedBox(width: 15),
-                      Text(
-                        'Mpitana',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.onBackground,
-                          shadows: [
-                            Shadow(
-                              offset: Offset(1, 1),
-                              blurRadius: 3,
-                              color: Theme.of(context).colorScheme.onBackground.withOpacity(0.2),
-                            ),
-                          ],
+
+                      // Replace 'Mpitana' text with logo
+                      ClipOval(
+                        child: Image.asset(
+                          Theme.of(context).brightness == Brightness.dark
+                              ? 'lib/assets/logo/logo_white.png'
+                              : 'lib/assets/logo/logo_dark.png',
+                          width: 120,
+                          height: 120,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ],
