@@ -7,6 +7,7 @@ import 'package:mpitana/screens/map/map_screen.dart';
 import 'package:mpitana/screens/offerRide/offer_ride_screen.dart';
 import 'package:mpitana/screens/profile/profile_screen.dart';
 import 'package:mpitana/screens/rides/rides_screen.dart'; // Import the new rides screen
+import 'package:mpitana/screens/wallet/wallet_screen.dart'; // Import the wallet screen
 
 
 class HomeScreen extends StatefulWidget {
@@ -43,7 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _widgetOptions = <Widget>[
     const FindRideScreen(),
     const OfferRideScreen(),
-    const RidesScreen(),
+    const RidesScreen(currentUserId: 'user123'), // Demo user ID
+    const WalletScreen(userId: 'user123'), // Demo user ID
     MessagesScreen(),
     // ChatScreen(chatItem: ChatItem(name: 'John Doe', lastMessage: 'Hello, how are you?', time: '12:00 PM', profileImage: 'https://i.ibb.co/6rP1gQ3/burundi-flag-logo.png')),
     const ProfileScreen(),
@@ -262,11 +264,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: '',
               ),
               BottomNavigationBarItem(
-                icon: Icon(_selectedIndex == 3 ? Icons.chat_bubble : Icons.chat_bubble_outline),
+                icon: Icon(_selectedIndex == 3 ? Icons.account_balance_wallet : Icons.account_balance_wallet_outlined),
+                label: 'Wallet',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(_selectedIndex == 4 ? Icons.chat_bubble : Icons.chat_bubble_outline),
                 label: 'Messages',
               ),
               BottomNavigationBarItem(
-                icon: Icon(_selectedIndex == 4 ? Icons.person : Icons.person_outline),
+                icon: Icon(_selectedIndex == 5 ? Icons.person : Icons.person_outline),
                 label: 'Profile',
               ),
             ],
@@ -278,7 +284,11 @@ class _HomeScreenState extends State<HomeScreen> {
               if (index == 2) return;
               
               // Adjust index if it's greater than 2 (after the FAB)
-              _onItemTapped(index);
+              if (index > 2) {
+                _onItemTapped(index);
+              } else {
+                _onItemTapped(index);
+              }
             },
             type: BottomNavigationBarType.fixed,
             showSelectedLabels: true,

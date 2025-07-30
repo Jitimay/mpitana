@@ -15,233 +15,677 @@ import 'package:objectbox/objectbox.dart' as obx;
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
 import 'screens/offerRide/models/location.dart';
+import 'screens/offerRide/models/rating.dart';
+import 'screens/offerRide/models/ride_booking.dart';
 import 'screens/offerRide/models/ride_offer.dart';
 import 'screens/profile/models/user_profile.dart';
+import 'screens/wallet/models/payment_method.dart';
+import 'screens/wallet/models/transaction.dart';
+import 'screens/wallet/models/wallet.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(1, 7027434267507269485),
+      id: const obx_int.IdUid(1, 2125924093500109555),
       name: 'Location',
-      lastPropertyId: const obx_int.IdUid(8, 5098411677319176080),
+      lastPropertyId: const obx_int.IdUid(8, 4893838371435363686),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 4592894167065833675),
+            id: const obx_int.IdUid(1, 2292572473685582497),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 3799701622443345766),
+            id: const obx_int.IdUid(2, 2196495117439109006),
             name: 'latitude',
             type: 8,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 5582381950345498009),
+            id: const obx_int.IdUid(3, 7960218000729966965),
             name: 'longitude',
             type: 8,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 4099493474036263428),
+            id: const obx_int.IdUid(4, 7893866070242194615),
             name: 'address',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 5603384658397001722),
+            id: const obx_int.IdUid(5, 6080168885661432138),
             name: 'city',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 6365883484189651592),
+            id: const obx_int.IdUid(6, 202534173072599588),
             name: 'country',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 6689910268872050347),
+            id: const obx_int.IdUid(7, 7799772020097375616),
             name: 'isDeparture',
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 5098411677319176080),
+            id: const obx_int.IdUid(8, 4893838371435363686),
             name: 'createdAt',
             type: 10,
             flags: 8,
-            indexId: const obx_int.IdUid(1, 8375028642304164987))
+            indexId: const obx_int.IdUid(1, 4112157168144258101))
       ],
       relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[]),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(2, 2952514429372149847),
-      name: 'RideOffer',
-      lastPropertyId: const obx_int.IdUid(16, 5455907999534103885),
+      id: const obx_int.IdUid(2, 1525293155075997683),
+      name: 'PaymentMethod',
+      lastPropertyId: const obx_int.IdUid(17, 7541985412869655),
       flags: 0,
       properties: <obx_int.ModelProperty>[
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 2376060431977909024),
+            id: const obx_int.IdUid(1, 7490517624561235068),
             name: 'id',
             type: 6,
             flags: 1),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 2336104575359050522),
-            name: 'departureLat',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 255059376219021996),
-            name: 'departureLng',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 3178864270068061554),
-            name: 'destinationLat',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 1102553123676652503),
-            name: 'destinationLng',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 4920240132591212075),
-            name: 'from',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 9069432423137568416),
-            name: 'to',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 5125072493044826262),
-            name: 'dateTime',
-            type: 10,
-            flags: 8,
-            indexId: const obx_int.IdUid(2, 6367058901361562702)),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 3466995751616172525),
-            name: 'availableSeats',
-            type: 6,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(10, 5340081576551149724),
-            name: 'price',
-            type: 8,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(11, 6534060171361344552),
-            name: 'description',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(12, 5820776593353759286),
-            name: 'createdAt',
-            type: 10,
-            flags: 8,
-            indexId: const obx_int.IdUid(3, 477297220318915487)),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(13, 7392615715792204974),
-            name: 'driverName',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(14, 6491985399024281136),
-            name: 'driverId',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(15, 2179086017587896300),
-            name: 'vehicleInfo',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(16, 5455907999534103885),
-            name: 'isActive',
-            type: 1,
-            flags: 8,
-            indexId: const obx_int.IdUid(4, 682870673175232116))
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[]),
-  obx_int.ModelEntity(
-      id: const obx_int.IdUid(3, 7015521020507013135),
-      name: 'UserProfile',
-      lastPropertyId: const obx_int.IdUid(15, 4333117446053075055),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 6713263157646582868),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 915147883494439490),
+            id: const obx_int.IdUid(2, 78984344954261512),
             name: 'userId',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 5967573162891879223),
-            name: 'name',
+            id: const obx_int.IdUid(3, 5758748102653616934),
+            name: 'methodId',
             type: 9,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 207584510669086079),
-            name: 'email',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 5829136283731079715),
-            name: 'phone',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 8763408967394642617),
-            name: 'bio',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 1676564742345896168),
-            name: 'profileImageUrl',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(8, 953472046321755433),
-            name: 'createdAtTimestamp',
+            id: const obx_int.IdUid(4, 3934485863751984297),
+            name: 'typeIndex',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(9, 372241672962909529),
-            name: 'ridesOffered',
+            id: const obx_int.IdUid(5, 5311863298434999914),
+            name: 'displayName',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 3285072741578743895),
+            name: 'last4Digits',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 969808666536344505),
+            name: 'brand',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 6521859603741085769),
+            name: 'expiryMonth',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 9018458042076889451),
+            name: 'expiryYear',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(10, 1185728217744391023),
+            name: 'bankName',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(11, 8611618564106960153),
+            name: 'accountHolderName',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(12, 1919655075846736844),
+            name: 'isDefault',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(13, 3340163649469216107),
+            name: 'isActive',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(14, 4638081793534757585),
+            name: 'stripePaymentMethodId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(15, 4563868117352617977),
+            name: 'paypalPaymentMethodId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(16, 2760308947051616362),
+            name: 'createdAt',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(17, 7541985412869655),
+            name: 'updatedAt',
+            type: 10,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(3, 2240335123014190167),
+      name: 'Rating',
+      lastPropertyId: const obx_int.IdUid(16, 3003123034704585359),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 4433689969496626658),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 8282337983068491926),
+            name: 'raterId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 1715954131959094991),
+            name: 'ratedUserId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 2216647085412497256),
+            name: 'rideBookingId',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(10, 2364796890377538354),
-            name: 'ridesTaken',
+            id: const obx_int.IdUid(5, 2937181225899715348),
+            name: 'rideOfferId',
             type: 6,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(11, 5248602872016811621),
+            id: const obx_int.IdUid(6, 6811216281857787896),
             name: 'rating',
             type: 8,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(12, 3593465494061984158),
+            id: const obx_int.IdUid(7, 2785502527148242512),
+            name: 'review',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 8123432174338132500),
+            name: 'punctualityRating',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 5363873080121358552),
+            name: 'communicationRating',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(10, 426161612565967800),
+            name: 'safetyRating',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(11, 3818179806165841720),
+            name: 'cleanlinessRating',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(12, 2189885600457889960),
+            name: 'friendlinessRating',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(13, 6300431077352397797),
+            name: 'createdAt',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(14, 794787056462655445),
+            name: 'updatedAt',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(15, 494816110081691965),
+            name: 'ratingType',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(2, 6920115829185626003)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(16, 3003123034704585359),
+            name: 'tags',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(4, 2124181509431087318),
+      name: 'RideBooking',
+      lastPropertyId: const obx_int.IdUid(16, 5084945020684550711),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 8919867038586932263),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 2722807475642056866),
+            name: 'riderId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 7326520530222226276),
+            name: 'driverId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 8167686558072554447),
+            name: 'rideOfferId',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 1990752013828703214),
+            name: 'seatsBooked',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 8664869269444159675),
+            name: 'totalPrice',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 2817373088895452941),
+            name: 'bookedAt',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 3693206631839571938),
+            name: 'rideCompletedAt',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 4304197409898944817),
+            name: 'status',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(3, 9133233153055655609)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(10, 1616188828872985345),
+            name: 'riderName',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(11, 4798170883039761703),
+            name: 'riderPhone',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(12, 54188820493987225),
+            name: 'driverName',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(13, 8691293606681777580),
+            name: 'driverPhone',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(14, 6348845433752975812),
+            name: 'paymentMethod',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(15, 8909606173225047072),
+            name: 'paymentStatus',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(16, 5084945020684550711),
+            name: 'notes',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(5, 3038872399599981010),
+      name: 'RideOffer',
+      lastPropertyId: const obx_int.IdUid(22, 2339580888354214874),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 9034807345892853801),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 4951554636791021592),
+            name: 'departureLat',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 7627261142897907466),
+            name: 'departureLng',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 8987552806856484856),
+            name: 'destinationLat',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 5498087746299421406),
+            name: 'destinationLng',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 5094982961012238222),
+            name: 'from',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 3487076088070541099),
+            name: 'to',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 8077901864787405016),
+            name: 'dateTime',
+            type: 10,
+            flags: 8,
+            indexId: const obx_int.IdUid(4, 6498680087435162863)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 7109925274273528562),
+            name: 'availableSeats',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(10, 5805275863619735294),
+            name: 'bookedSeats',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(11, 4029758628682703214),
+            name: 'price',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(12, 8655441074574066200),
+            name: 'description',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(13, 6059372967355520218),
+            name: 'createdAt',
+            type: 10,
+            flags: 8,
+            indexId: const obx_int.IdUid(5, 3117484758809206671)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(14, 2454460296740214357),
+            name: 'driverName',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(15, 5976085702616002023),
+            name: 'driverId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(16, 6871614065047018096),
+            name: 'vehicleInfo',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(17, 3659902907409899110),
+            name: 'driverPhone',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(18, 9070868439635687075),
+            name: 'isActive',
+            type: 1,
+            flags: 8,
+            indexId: const obx_int.IdUid(6, 3656352691108407953)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(19, 168899959970529943),
+            name: 'status',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(7, 7703970112264406806)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(20, 1744934485120724084),
+            name: 'completedAt',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(21, 6571516207491732020),
+            name: 'averageRating',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(22, 2339580888354214874),
+            name: 'totalRatings',
+            type: 6,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(6, 5692441861579222575),
+      name: 'UserProfile',
+      lastPropertyId: const obx_int.IdUid(15, 7916367471589079840),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 1961009644166239676),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 7025805803187867276),
+            name: 'userId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 1533471779499895018),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 96289341456842787),
+            name: 'email',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 8178710576929532324),
+            name: 'phone',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 3572610838598992595),
+            name: 'bio',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 4775509796113386911),
+            name: 'profileImageUrl',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 6783426682149671656),
+            name: 'createdAtTimestamp',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 6035645878630123561),
+            name: 'ridesOffered',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(10, 6629428153546711490),
+            name: 'ridesTaken',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(11, 1740721854783506416),
+            name: 'rating',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(12, 4484044975999916775),
             name: 'rideNotifications',
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(13, 4320657127011586534),
+            id: const obx_int.IdUid(13, 8813587816431037502),
             name: 'chatNotifications',
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(14, 3959828320454289423),
+            id: const obx_int.IdUid(14, 3163245786627945043),
             name: 'emailNotifications',
             type: 1,
             flags: 0),
         obx_int.ModelProperty(
-            id: const obx_int.IdUid(15, 4333117446053075055),
+            id: const obx_int.IdUid(15, 7916367471589079840),
             name: 'createdAt',
+            type: 10,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(7, 5508134392752608976),
+      name: 'Wallet',
+      lastPropertyId: const obx_int.IdUid(7, 4634700715761295683),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 3318775816934282789),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 3061999970321562067),
+            name: 'userId',
+            type: 9,
+            flags: 2080,
+            indexId: const obx_int.IdUid(8, 9208425397211965589)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 6095253095984968929),
+            name: 'balance',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 2818620535167104705),
+            name: 'currency',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 6783221700782208841),
+            name: 'isActive',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 2857790220937775539),
+            name: 'createdAt',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 4634700715761295683),
+            name: 'updatedAt',
+            type: 10,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(8, 5909865369336446619),
+      name: 'WalletTransaction',
+      lastPropertyId: const obx_int.IdUid(16, 4468152403357957313),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 5324665123105562868),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 5557813084806591673),
+            name: 'userId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 6516074185025219669),
+            name: 'transactionId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 3134130987466601776),
+            name: 'amount',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 5711770648065187683),
+            name: 'currency',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 2591032248931348326),
+            name: 'typeIndex',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 757916528628785888),
+            name: 'statusIndex',
+            type: 6,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 7778683851035385298),
+            name: 'description',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 397302565081826917),
+            name: 'referenceId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(10, 7657575979306129814),
+            name: 'paymentMethod',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(11, 8642698617816210239),
+            name: 'paymentGatewayId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(12, 9080547615282258699),
+            name: 'balanceBefore',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(13, 5669203914039970047),
+            name: 'balanceAfter',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(14, 8365998670132508659),
+            name: 'createdAt',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(15, 1332724163742481297),
+            name: 'updatedAt',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(16, 4468152403357957313),
+            name: 'completedAt',
             type: 10,
             flags: 0)
       ],
@@ -284,8 +728,8 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(3, 7015521020507013135),
-      lastIndexId: const obx_int.IdUid(4, 682870673175232116),
+      lastEntityId: const obx_int.IdUid(8, 5909865369336446619),
+      lastIndexId: const obx_int.IdUid(8, 9208425397211965589),
       lastRelationId: const obx_int.IdUid(0, 0),
       lastSequenceId: const obx_int.IdUid(0, 0),
       retiredEntityUids: const [],
@@ -346,8 +790,331 @@ obx_int.ModelDefinition getObjectBoxModel() {
 
           return object;
         }),
-    RideOffer: obx_int.EntityDefinition<RideOffer>(
+    PaymentMethod: obx_int.EntityDefinition<PaymentMethod>(
         model: _entities[1],
+        toOneRelations: (PaymentMethod object) => [],
+        toManyRelations: (PaymentMethod object) => {},
+        getId: (PaymentMethod object) => object.id,
+        setId: (PaymentMethod object, int id) {
+          object.id = id;
+        },
+        objectToFB: (PaymentMethod object, fb.Builder fbb) {
+          final userIdOffset = fbb.writeString(object.userId);
+          final methodIdOffset = fbb.writeString(object.methodId);
+          final displayNameOffset = fbb.writeString(object.displayName);
+          final last4DigitsOffset = object.last4Digits == null
+              ? null
+              : fbb.writeString(object.last4Digits!);
+          final brandOffset =
+              object.brand == null ? null : fbb.writeString(object.brand!);
+          final expiryMonthOffset = object.expiryMonth == null
+              ? null
+              : fbb.writeString(object.expiryMonth!);
+          final expiryYearOffset = object.expiryYear == null
+              ? null
+              : fbb.writeString(object.expiryYear!);
+          final bankNameOffset = object.bankName == null
+              ? null
+              : fbb.writeString(object.bankName!);
+          final accountHolderNameOffset = object.accountHolderName == null
+              ? null
+              : fbb.writeString(object.accountHolderName!);
+          final stripePaymentMethodIdOffset =
+              object.stripePaymentMethodId == null
+                  ? null
+                  : fbb.writeString(object.stripePaymentMethodId!);
+          final paypalPaymentMethodIdOffset =
+              object.paypalPaymentMethodId == null
+                  ? null
+                  : fbb.writeString(object.paypalPaymentMethodId!);
+          fbb.startTable(18);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, userIdOffset);
+          fbb.addOffset(2, methodIdOffset);
+          fbb.addInt64(3, object.typeIndex);
+          fbb.addOffset(4, displayNameOffset);
+          fbb.addOffset(5, last4DigitsOffset);
+          fbb.addOffset(6, brandOffset);
+          fbb.addOffset(7, expiryMonthOffset);
+          fbb.addOffset(8, expiryYearOffset);
+          fbb.addOffset(9, bankNameOffset);
+          fbb.addOffset(10, accountHolderNameOffset);
+          fbb.addBool(11, object.isDefault);
+          fbb.addBool(12, object.isActive);
+          fbb.addOffset(13, stripePaymentMethodIdOffset);
+          fbb.addOffset(14, paypalPaymentMethodIdOffset);
+          fbb.addInt64(15, object.createdAt.millisecondsSinceEpoch);
+          fbb.addInt64(16, object.updatedAt.millisecondsSinceEpoch);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final userIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final methodIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final displayNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, '');
+          final last4DigitsParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 14);
+          final brandParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 16);
+          final expiryMonthParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 18);
+          final expiryYearParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 20);
+          final bankNameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 22);
+          final accountHolderNameParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 24);
+          final isDefaultParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 26, false);
+          final isActiveParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 28, false);
+          final stripePaymentMethodIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 30);
+          final paypalPaymentMethodIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 32);
+          final createdAtParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 34, 0));
+          final updatedAtParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 36, 0));
+          final object = PaymentMethod(
+              userId: userIdParam,
+              methodId: methodIdParam,
+              displayName: displayNameParam,
+              last4Digits: last4DigitsParam,
+              brand: brandParam,
+              expiryMonth: expiryMonthParam,
+              expiryYear: expiryYearParam,
+              bankName: bankNameParam,
+              accountHolderName: accountHolderNameParam,
+              isDefault: isDefaultParam,
+              isActive: isActiveParam,
+              stripePaymentMethodId: stripePaymentMethodIdParam,
+              paypalPaymentMethodId: paypalPaymentMethodIdParam,
+              createdAt: createdAtParam,
+              updatedAt: updatedAtParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+            ..typeIndex =
+                const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+
+          return object;
+        }),
+    Rating: obx_int.EntityDefinition<Rating>(
+        model: _entities[2],
+        toOneRelations: (Rating object) => [],
+        toManyRelations: (Rating object) => {},
+        getId: (Rating object) => object.id,
+        setId: (Rating object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Rating object, fb.Builder fbb) {
+          final raterIdOffset = fbb.writeString(object.raterId);
+          final ratedUserIdOffset = fbb.writeString(object.ratedUserId);
+          final reviewOffset =
+              object.review == null ? null : fbb.writeString(object.review!);
+          final ratingTypeOffset = fbb.writeString(object.ratingType);
+          final tagsOffset =
+              object.tags == null ? null : fbb.writeString(object.tags!);
+          fbb.startTable(17);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, raterIdOffset);
+          fbb.addOffset(2, ratedUserIdOffset);
+          fbb.addInt64(3, object.rideBookingId);
+          fbb.addInt64(4, object.rideOfferId);
+          fbb.addFloat64(5, object.rating);
+          fbb.addOffset(6, reviewOffset);
+          fbb.addFloat64(7, object.punctualityRating);
+          fbb.addFloat64(8, object.communicationRating);
+          fbb.addFloat64(9, object.safetyRating);
+          fbb.addFloat64(10, object.cleanlinessRating);
+          fbb.addFloat64(11, object.friendlinessRating);
+          fbb.addInt64(12, object.createdAt.millisecondsSinceEpoch);
+          fbb.addInt64(13, object.updatedAt?.millisecondsSinceEpoch);
+          fbb.addOffset(14, ratingTypeOffset);
+          fbb.addOffset(15, tagsOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final updatedAtValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 30);
+          final raterIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final ratedUserIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 8, '');
+          final rideBookingIdParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final rideOfferIdParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
+          final ratingParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 14, 0);
+          final ratingTypeParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 32, '');
+          final reviewParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 16);
+          final punctualityRatingParam = const fb.Float64Reader()
+              .vTableGetNullable(buffer, rootOffset, 18);
+          final communicationRatingParam = const fb.Float64Reader()
+              .vTableGetNullable(buffer, rootOffset, 20);
+          final safetyRatingParam = const fb.Float64Reader()
+              .vTableGetNullable(buffer, rootOffset, 22);
+          final cleanlinessRatingParam = const fb.Float64Reader()
+              .vTableGetNullable(buffer, rootOffset, 24);
+          final friendlinessRatingParam = const fb.Float64Reader()
+              .vTableGetNullable(buffer, rootOffset, 26);
+          final tagsParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 34);
+          final createdAtParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 28, 0));
+          final updatedAtParam = updatedAtValue == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(updatedAtValue);
+          final object = Rating(
+              raterId: raterIdParam,
+              ratedUserId: ratedUserIdParam,
+              rideBookingId: rideBookingIdParam,
+              rideOfferId: rideOfferIdParam,
+              rating: ratingParam,
+              ratingType: ratingTypeParam,
+              review: reviewParam,
+              punctualityRating: punctualityRatingParam,
+              communicationRating: communicationRatingParam,
+              safetyRating: safetyRatingParam,
+              cleanlinessRating: cleanlinessRatingParam,
+              friendlinessRating: friendlinessRatingParam,
+              tags: tagsParam,
+              createdAt: createdAtParam,
+              updatedAt: updatedAtParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
+        }),
+    RideBooking: obx_int.EntityDefinition<RideBooking>(
+        model: _entities[3],
+        toOneRelations: (RideBooking object) => [],
+        toManyRelations: (RideBooking object) => {},
+        getId: (RideBooking object) => object.id,
+        setId: (RideBooking object, int id) {
+          object.id = id;
+        },
+        objectToFB: (RideBooking object, fb.Builder fbb) {
+          final riderIdOffset = fbb.writeString(object.riderId);
+          final driverIdOffset = fbb.writeString(object.driverId);
+          final statusOffset = fbb.writeString(object.status);
+          final riderNameOffset = object.riderName == null
+              ? null
+              : fbb.writeString(object.riderName!);
+          final riderPhoneOffset = object.riderPhone == null
+              ? null
+              : fbb.writeString(object.riderPhone!);
+          final driverNameOffset = object.driverName == null
+              ? null
+              : fbb.writeString(object.driverName!);
+          final driverPhoneOffset = object.driverPhone == null
+              ? null
+              : fbb.writeString(object.driverPhone!);
+          final paymentMethodOffset = object.paymentMethod == null
+              ? null
+              : fbb.writeString(object.paymentMethod!);
+          final paymentStatusOffset = object.paymentStatus == null
+              ? null
+              : fbb.writeString(object.paymentStatus!);
+          final notesOffset =
+              object.notes == null ? null : fbb.writeString(object.notes!);
+          fbb.startTable(17);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, riderIdOffset);
+          fbb.addOffset(2, driverIdOffset);
+          fbb.addInt64(3, object.rideOfferId);
+          fbb.addInt64(4, object.seatsBooked);
+          fbb.addFloat64(5, object.totalPrice);
+          fbb.addInt64(6, object.bookedAt.millisecondsSinceEpoch);
+          fbb.addInt64(7, object.rideCompletedAt?.millisecondsSinceEpoch);
+          fbb.addOffset(8, statusOffset);
+          fbb.addOffset(9, riderNameOffset);
+          fbb.addOffset(10, riderPhoneOffset);
+          fbb.addOffset(11, driverNameOffset);
+          fbb.addOffset(12, driverPhoneOffset);
+          fbb.addOffset(13, paymentMethodOffset);
+          fbb.addOffset(14, paymentStatusOffset);
+          fbb.addOffset(15, notesOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final rideCompletedAtValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 18);
+          final riderIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final driverIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 8, '');
+          final rideOfferIdParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final seatsBookedParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 12, 0);
+          final totalPriceParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 14, 0);
+          final statusParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 20, '');
+          final riderNameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 22);
+          final riderPhoneParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 24);
+          final driverNameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 26);
+          final driverPhoneParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 28);
+          final paymentMethodParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 30);
+          final paymentStatusParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 32);
+          final notesParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 34);
+          final bookedAtParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
+          final rideCompletedAtParam = rideCompletedAtValue == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(rideCompletedAtValue);
+          final object = RideBooking(
+              riderId: riderIdParam,
+              driverId: driverIdParam,
+              rideOfferId: rideOfferIdParam,
+              seatsBooked: seatsBookedParam,
+              totalPrice: totalPriceParam,
+              status: statusParam,
+              riderName: riderNameParam,
+              riderPhone: riderPhoneParam,
+              driverName: driverNameParam,
+              driverPhone: driverPhoneParam,
+              paymentMethod: paymentMethodParam,
+              paymentStatus: paymentStatusParam,
+              notes: notesParam,
+              bookedAt: bookedAtParam,
+              rideCompletedAt: rideCompletedAtParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
+        }),
+    RideOffer: obx_int.EntityDefinition<RideOffer>(
+        model: _entities[4],
         toOneRelations: (RideOffer object) => [],
         toManyRelations: (RideOffer object) => {},
         getId: (RideOffer object) => object.id,
@@ -367,7 +1134,11 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final vehicleInfoOffset = object.vehicleInfo == null
               ? null
               : fbb.writeString(object.vehicleInfo!);
-          fbb.startTable(17);
+          final driverPhoneOffset = object.driverPhone == null
+              ? null
+              : fbb.writeString(object.driverPhone!);
+          final statusOffset = fbb.writeString(object.status);
+          fbb.startTable(23);
           fbb.addInt64(0, object.id);
           fbb.addFloat64(1, object.departureLat);
           fbb.addFloat64(2, object.departureLng);
@@ -377,19 +1148,27 @@ obx_int.ModelDefinition getObjectBoxModel() {
           fbb.addOffset(6, toOffset);
           fbb.addInt64(7, object.dateTime.millisecondsSinceEpoch);
           fbb.addInt64(8, object.availableSeats);
-          fbb.addFloat64(9, object.price);
-          fbb.addOffset(10, descriptionOffset);
-          fbb.addInt64(11, object.createdAt.millisecondsSinceEpoch);
-          fbb.addOffset(12, driverNameOffset);
-          fbb.addOffset(13, driverIdOffset);
-          fbb.addOffset(14, vehicleInfoOffset);
-          fbb.addBool(15, object.isActive);
+          fbb.addInt64(9, object.bookedSeats);
+          fbb.addFloat64(10, object.price);
+          fbb.addOffset(11, descriptionOffset);
+          fbb.addInt64(12, object.createdAt.millisecondsSinceEpoch);
+          fbb.addOffset(13, driverNameOffset);
+          fbb.addOffset(14, driverIdOffset);
+          fbb.addOffset(15, vehicleInfoOffset);
+          fbb.addOffset(16, driverPhoneOffset);
+          fbb.addBool(17, object.isActive);
+          fbb.addOffset(18, statusOffset);
+          fbb.addInt64(19, object.completedAt?.millisecondsSinceEpoch);
+          fbb.addFloat64(20, object.averageRating);
+          fbb.addInt64(21, object.totalRatings);
           fbb.finish(fbb.endTable());
           return object.id;
         },
         objectFromFB: (obx.Store store, ByteData fbData) {
           final buffer = fb.BufferContext(fbData);
           final rootOffset = buffer.derefObject(0);
+          final completedAtValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 42);
           final departureLatParam =
               const fb.Float64Reader().vTableGet(buffer, rootOffset, 6, 0);
           final departureLngParam =
@@ -407,19 +1186,33 @@ obx_int.ModelDefinition getObjectBoxModel() {
           final availableSeatsParam =
               const fb.Int64Reader().vTableGet(buffer, rootOffset, 20, 0);
           final priceParam =
-              const fb.Float64Reader().vTableGet(buffer, rootOffset, 22, 0);
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 24, 0);
           final descriptionParam =
               const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 24, '');
+                  .vTableGet(buffer, rootOffset, 26, '');
           final driverNameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 28);
-          final driverIdParam = const fb.StringReader(asciiOptimization: true)
               .vTableGetNullable(buffer, rootOffset, 30);
+          final driverIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 32);
           final vehicleInfoParam =
               const fb.StringReader(asciiOptimization: true)
-                  .vTableGetNullable(buffer, rootOffset, 32);
+                  .vTableGetNullable(buffer, rootOffset, 34);
+          final driverPhoneParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 36);
           final isActiveParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 34, false);
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 38, false);
+          final bookedSeatsParam =
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 22, 0);
+          final statusParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 40, '');
+          final completedAtParam = completedAtValue == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(completedAtValue);
+          final averageRatingParam = const fb.Float64Reader()
+              .vTableGetNullable(buffer, rootOffset, 44);
+          final totalRatingsParam =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 46);
           final object = RideOffer(
               departureLat: departureLatParam,
               departureLng: departureLngParam,
@@ -434,15 +1227,21 @@ obx_int.ModelDefinition getObjectBoxModel() {
               driverName: driverNameParam,
               driverId: driverIdParam,
               vehicleInfo: vehicleInfoParam,
-              isActive: isActiveParam)
+              driverPhone: driverPhoneParam,
+              isActive: isActiveParam,
+              bookedSeats: bookedSeatsParam,
+              status: statusParam,
+              completedAt: completedAtParam,
+              averageRating: averageRatingParam,
+              totalRatings: totalRatingsParam)
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
             ..createdAt = DateTime.fromMillisecondsSinceEpoch(
-                const fb.Int64Reader().vTableGet(buffer, rootOffset, 26, 0));
+                const fb.Int64Reader().vTableGet(buffer, rootOffset, 28, 0));
 
           return object;
         }),
     UserProfile: obx_int.EntityDefinition<UserProfile>(
-        model: _entities[2],
+        model: _entities[5],
         toOneRelations: (UserProfile object) => [],
         toManyRelations: (UserProfile object) => {},
         getId: (UserProfile object) => object.id,
@@ -528,6 +1327,155 @@ obx_int.ModelDefinition getObjectBoxModel() {
                 const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
 
           return object;
+        }),
+    Wallet: obx_int.EntityDefinition<Wallet>(
+        model: _entities[6],
+        toOneRelations: (Wallet object) => [],
+        toManyRelations: (Wallet object) => {},
+        getId: (Wallet object) => object.id,
+        setId: (Wallet object, int id) {
+          object.id = id;
+        },
+        objectToFB: (Wallet object, fb.Builder fbb) {
+          final userIdOffset = fbb.writeString(object.userId);
+          final currencyOffset = fbb.writeString(object.currency);
+          fbb.startTable(8);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, userIdOffset);
+          fbb.addFloat64(2, object.balance);
+          fbb.addOffset(3, currencyOffset);
+          fbb.addBool(4, object.isActive);
+          fbb.addInt64(5, object.createdAt.millisecondsSinceEpoch);
+          fbb.addInt64(6, object.updatedAt.millisecondsSinceEpoch);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final userIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final balanceParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final currencyParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 10, '');
+          final isActiveParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 12, false);
+          final createdAtParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0));
+          final updatedAtParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
+          final object = Wallet(
+              userId: userIdParam,
+              balance: balanceParam,
+              currency: currencyParam,
+              isActive: isActiveParam,
+              createdAt: createdAtParam,
+              updatedAt: updatedAtParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
+        }),
+    WalletTransaction: obx_int.EntityDefinition<WalletTransaction>(
+        model: _entities[7],
+        toOneRelations: (WalletTransaction object) => [],
+        toManyRelations: (WalletTransaction object) => {},
+        getId: (WalletTransaction object) => object.id,
+        setId: (WalletTransaction object, int id) {
+          object.id = id;
+        },
+        objectToFB: (WalletTransaction object, fb.Builder fbb) {
+          final userIdOffset = fbb.writeString(object.userId);
+          final transactionIdOffset = fbb.writeString(object.transactionId);
+          final currencyOffset = fbb.writeString(object.currency);
+          final descriptionOffset = fbb.writeString(object.description);
+          final referenceIdOffset = object.referenceId == null
+              ? null
+              : fbb.writeString(object.referenceId!);
+          final paymentMethodOffset = object.paymentMethod == null
+              ? null
+              : fbb.writeString(object.paymentMethod!);
+          final paymentGatewayIdOffset = object.paymentGatewayId == null
+              ? null
+              : fbb.writeString(object.paymentGatewayId!);
+          fbb.startTable(17);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, userIdOffset);
+          fbb.addOffset(2, transactionIdOffset);
+          fbb.addFloat64(3, object.amount);
+          fbb.addOffset(4, currencyOffset);
+          fbb.addInt64(5, object.typeIndex);
+          fbb.addInt64(6, object.statusIndex);
+          fbb.addOffset(7, descriptionOffset);
+          fbb.addOffset(8, referenceIdOffset);
+          fbb.addOffset(9, paymentMethodOffset);
+          fbb.addOffset(10, paymentGatewayIdOffset);
+          fbb.addFloat64(11, object.balanceBefore);
+          fbb.addFloat64(12, object.balanceAfter);
+          fbb.addInt64(13, object.createdAt.millisecondsSinceEpoch);
+          fbb.addInt64(14, object.updatedAt.millisecondsSinceEpoch);
+          fbb.addInt64(15, object.completedAt?.millisecondsSinceEpoch);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final completedAtValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 34);
+          final userIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final transactionIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 8, '');
+          final amountParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final currencyParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 12, '');
+          final descriptionParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 18, '');
+          final referenceIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 20);
+          final paymentMethodParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 22);
+          final paymentGatewayIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 24);
+          final balanceBeforeParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 26, 0);
+          final balanceAfterParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 28, 0);
+          final createdAtParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 30, 0));
+          final updatedAtParam = DateTime.fromMillisecondsSinceEpoch(
+              const fb.Int64Reader().vTableGet(buffer, rootOffset, 32, 0));
+          final completedAtParam = completedAtValue == null
+              ? null
+              : DateTime.fromMillisecondsSinceEpoch(completedAtValue);
+          final object = WalletTransaction(
+              userId: userIdParam,
+              transactionId: transactionIdParam,
+              amount: amountParam,
+              currency: currencyParam,
+              description: descriptionParam,
+              referenceId: referenceIdParam,
+              paymentMethod: paymentMethodParam,
+              paymentGatewayId: paymentGatewayIdParam,
+              balanceBefore: balanceBeforeParam,
+              balanceAfter: balanceAfterParam,
+              createdAt: createdAtParam,
+              updatedAt: updatedAtParam,
+              completedAt: completedAtParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+            ..typeIndex =
+                const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0)
+            ..statusIndex =
+                const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0);
+
+          return object;
         })
   };
 
@@ -569,132 +1517,459 @@ class Location_ {
       obx.QueryDateProperty<Location>(_entities[0].properties[7]);
 }
 
+/// [PaymentMethod] entity fields to define ObjectBox queries.
+class PaymentMethod_ {
+  /// See [PaymentMethod.id].
+  static final id =
+      obx.QueryIntegerProperty<PaymentMethod>(_entities[1].properties[0]);
+
+  /// See [PaymentMethod.userId].
+  static final userId =
+      obx.QueryStringProperty<PaymentMethod>(_entities[1].properties[1]);
+
+  /// See [PaymentMethod.methodId].
+  static final methodId =
+      obx.QueryStringProperty<PaymentMethod>(_entities[1].properties[2]);
+
+  /// See [PaymentMethod.typeIndex].
+  static final typeIndex =
+      obx.QueryIntegerProperty<PaymentMethod>(_entities[1].properties[3]);
+
+  /// See [PaymentMethod.displayName].
+  static final displayName =
+      obx.QueryStringProperty<PaymentMethod>(_entities[1].properties[4]);
+
+  /// See [PaymentMethod.last4Digits].
+  static final last4Digits =
+      obx.QueryStringProperty<PaymentMethod>(_entities[1].properties[5]);
+
+  /// See [PaymentMethod.brand].
+  static final brand =
+      obx.QueryStringProperty<PaymentMethod>(_entities[1].properties[6]);
+
+  /// See [PaymentMethod.expiryMonth].
+  static final expiryMonth =
+      obx.QueryStringProperty<PaymentMethod>(_entities[1].properties[7]);
+
+  /// See [PaymentMethod.expiryYear].
+  static final expiryYear =
+      obx.QueryStringProperty<PaymentMethod>(_entities[1].properties[8]);
+
+  /// See [PaymentMethod.bankName].
+  static final bankName =
+      obx.QueryStringProperty<PaymentMethod>(_entities[1].properties[9]);
+
+  /// See [PaymentMethod.accountHolderName].
+  static final accountHolderName =
+      obx.QueryStringProperty<PaymentMethod>(_entities[1].properties[10]);
+
+  /// See [PaymentMethod.isDefault].
+  static final isDefault =
+      obx.QueryBooleanProperty<PaymentMethod>(_entities[1].properties[11]);
+
+  /// See [PaymentMethod.isActive].
+  static final isActive =
+      obx.QueryBooleanProperty<PaymentMethod>(_entities[1].properties[12]);
+
+  /// See [PaymentMethod.stripePaymentMethodId].
+  static final stripePaymentMethodId =
+      obx.QueryStringProperty<PaymentMethod>(_entities[1].properties[13]);
+
+  /// See [PaymentMethod.paypalPaymentMethodId].
+  static final paypalPaymentMethodId =
+      obx.QueryStringProperty<PaymentMethod>(_entities[1].properties[14]);
+
+  /// See [PaymentMethod.createdAt].
+  static final createdAt =
+      obx.QueryDateProperty<PaymentMethod>(_entities[1].properties[15]);
+
+  /// See [PaymentMethod.updatedAt].
+  static final updatedAt =
+      obx.QueryDateProperty<PaymentMethod>(_entities[1].properties[16]);
+}
+
+/// [Rating] entity fields to define ObjectBox queries.
+class Rating_ {
+  /// See [Rating.id].
+  static final id =
+      obx.QueryIntegerProperty<Rating>(_entities[2].properties[0]);
+
+  /// See [Rating.raterId].
+  static final raterId =
+      obx.QueryStringProperty<Rating>(_entities[2].properties[1]);
+
+  /// See [Rating.ratedUserId].
+  static final ratedUserId =
+      obx.QueryStringProperty<Rating>(_entities[2].properties[2]);
+
+  /// See [Rating.rideBookingId].
+  static final rideBookingId =
+      obx.QueryIntegerProperty<Rating>(_entities[2].properties[3]);
+
+  /// See [Rating.rideOfferId].
+  static final rideOfferId =
+      obx.QueryIntegerProperty<Rating>(_entities[2].properties[4]);
+
+  /// See [Rating.rating].
+  static final rating =
+      obx.QueryDoubleProperty<Rating>(_entities[2].properties[5]);
+
+  /// See [Rating.review].
+  static final review =
+      obx.QueryStringProperty<Rating>(_entities[2].properties[6]);
+
+  /// See [Rating.punctualityRating].
+  static final punctualityRating =
+      obx.QueryDoubleProperty<Rating>(_entities[2].properties[7]);
+
+  /// See [Rating.communicationRating].
+  static final communicationRating =
+      obx.QueryDoubleProperty<Rating>(_entities[2].properties[8]);
+
+  /// See [Rating.safetyRating].
+  static final safetyRating =
+      obx.QueryDoubleProperty<Rating>(_entities[2].properties[9]);
+
+  /// See [Rating.cleanlinessRating].
+  static final cleanlinessRating =
+      obx.QueryDoubleProperty<Rating>(_entities[2].properties[10]);
+
+  /// See [Rating.friendlinessRating].
+  static final friendlinessRating =
+      obx.QueryDoubleProperty<Rating>(_entities[2].properties[11]);
+
+  /// See [Rating.createdAt].
+  static final createdAt =
+      obx.QueryDateProperty<Rating>(_entities[2].properties[12]);
+
+  /// See [Rating.updatedAt].
+  static final updatedAt =
+      obx.QueryDateProperty<Rating>(_entities[2].properties[13]);
+
+  /// See [Rating.ratingType].
+  static final ratingType =
+      obx.QueryStringProperty<Rating>(_entities[2].properties[14]);
+
+  /// See [Rating.tags].
+  static final tags =
+      obx.QueryStringProperty<Rating>(_entities[2].properties[15]);
+}
+
+/// [RideBooking] entity fields to define ObjectBox queries.
+class RideBooking_ {
+  /// See [RideBooking.id].
+  static final id =
+      obx.QueryIntegerProperty<RideBooking>(_entities[3].properties[0]);
+
+  /// See [RideBooking.riderId].
+  static final riderId =
+      obx.QueryStringProperty<RideBooking>(_entities[3].properties[1]);
+
+  /// See [RideBooking.driverId].
+  static final driverId =
+      obx.QueryStringProperty<RideBooking>(_entities[3].properties[2]);
+
+  /// See [RideBooking.rideOfferId].
+  static final rideOfferId =
+      obx.QueryIntegerProperty<RideBooking>(_entities[3].properties[3]);
+
+  /// See [RideBooking.seatsBooked].
+  static final seatsBooked =
+      obx.QueryIntegerProperty<RideBooking>(_entities[3].properties[4]);
+
+  /// See [RideBooking.totalPrice].
+  static final totalPrice =
+      obx.QueryDoubleProperty<RideBooking>(_entities[3].properties[5]);
+
+  /// See [RideBooking.bookedAt].
+  static final bookedAt =
+      obx.QueryDateProperty<RideBooking>(_entities[3].properties[6]);
+
+  /// See [RideBooking.rideCompletedAt].
+  static final rideCompletedAt =
+      obx.QueryDateProperty<RideBooking>(_entities[3].properties[7]);
+
+  /// See [RideBooking.status].
+  static final status =
+      obx.QueryStringProperty<RideBooking>(_entities[3].properties[8]);
+
+  /// See [RideBooking.riderName].
+  static final riderName =
+      obx.QueryStringProperty<RideBooking>(_entities[3].properties[9]);
+
+  /// See [RideBooking.riderPhone].
+  static final riderPhone =
+      obx.QueryStringProperty<RideBooking>(_entities[3].properties[10]);
+
+  /// See [RideBooking.driverName].
+  static final driverName =
+      obx.QueryStringProperty<RideBooking>(_entities[3].properties[11]);
+
+  /// See [RideBooking.driverPhone].
+  static final driverPhone =
+      obx.QueryStringProperty<RideBooking>(_entities[3].properties[12]);
+
+  /// See [RideBooking.paymentMethod].
+  static final paymentMethod =
+      obx.QueryStringProperty<RideBooking>(_entities[3].properties[13]);
+
+  /// See [RideBooking.paymentStatus].
+  static final paymentStatus =
+      obx.QueryStringProperty<RideBooking>(_entities[3].properties[14]);
+
+  /// See [RideBooking.notes].
+  static final notes =
+      obx.QueryStringProperty<RideBooking>(_entities[3].properties[15]);
+}
+
 /// [RideOffer] entity fields to define ObjectBox queries.
 class RideOffer_ {
   /// See [RideOffer.id].
   static final id =
-      obx.QueryIntegerProperty<RideOffer>(_entities[1].properties[0]);
+      obx.QueryIntegerProperty<RideOffer>(_entities[4].properties[0]);
 
   /// See [RideOffer.departureLat].
   static final departureLat =
-      obx.QueryDoubleProperty<RideOffer>(_entities[1].properties[1]);
+      obx.QueryDoubleProperty<RideOffer>(_entities[4].properties[1]);
 
   /// See [RideOffer.departureLng].
   static final departureLng =
-      obx.QueryDoubleProperty<RideOffer>(_entities[1].properties[2]);
+      obx.QueryDoubleProperty<RideOffer>(_entities[4].properties[2]);
 
   /// See [RideOffer.destinationLat].
   static final destinationLat =
-      obx.QueryDoubleProperty<RideOffer>(_entities[1].properties[3]);
+      obx.QueryDoubleProperty<RideOffer>(_entities[4].properties[3]);
 
   /// See [RideOffer.destinationLng].
   static final destinationLng =
-      obx.QueryDoubleProperty<RideOffer>(_entities[1].properties[4]);
+      obx.QueryDoubleProperty<RideOffer>(_entities[4].properties[4]);
 
   /// See [RideOffer.from].
   static final from =
-      obx.QueryStringProperty<RideOffer>(_entities[1].properties[5]);
+      obx.QueryStringProperty<RideOffer>(_entities[4].properties[5]);
 
   /// See [RideOffer.to].
   static final to =
-      obx.QueryStringProperty<RideOffer>(_entities[1].properties[6]);
+      obx.QueryStringProperty<RideOffer>(_entities[4].properties[6]);
 
   /// See [RideOffer.dateTime].
   static final dateTime =
-      obx.QueryDateProperty<RideOffer>(_entities[1].properties[7]);
+      obx.QueryDateProperty<RideOffer>(_entities[4].properties[7]);
 
   /// See [RideOffer.availableSeats].
   static final availableSeats =
-      obx.QueryIntegerProperty<RideOffer>(_entities[1].properties[8]);
+      obx.QueryIntegerProperty<RideOffer>(_entities[4].properties[8]);
+
+  /// See [RideOffer.bookedSeats].
+  static final bookedSeats =
+      obx.QueryIntegerProperty<RideOffer>(_entities[4].properties[9]);
 
   /// See [RideOffer.price].
   static final price =
-      obx.QueryDoubleProperty<RideOffer>(_entities[1].properties[9]);
+      obx.QueryDoubleProperty<RideOffer>(_entities[4].properties[10]);
 
   /// See [RideOffer.description].
   static final description =
-      obx.QueryStringProperty<RideOffer>(_entities[1].properties[10]);
+      obx.QueryStringProperty<RideOffer>(_entities[4].properties[11]);
 
   /// See [RideOffer.createdAt].
   static final createdAt =
-      obx.QueryDateProperty<RideOffer>(_entities[1].properties[11]);
+      obx.QueryDateProperty<RideOffer>(_entities[4].properties[12]);
 
   /// See [RideOffer.driverName].
   static final driverName =
-      obx.QueryStringProperty<RideOffer>(_entities[1].properties[12]);
+      obx.QueryStringProperty<RideOffer>(_entities[4].properties[13]);
 
   /// See [RideOffer.driverId].
   static final driverId =
-      obx.QueryStringProperty<RideOffer>(_entities[1].properties[13]);
+      obx.QueryStringProperty<RideOffer>(_entities[4].properties[14]);
 
   /// See [RideOffer.vehicleInfo].
   static final vehicleInfo =
-      obx.QueryStringProperty<RideOffer>(_entities[1].properties[14]);
+      obx.QueryStringProperty<RideOffer>(_entities[4].properties[15]);
+
+  /// See [RideOffer.driverPhone].
+  static final driverPhone =
+      obx.QueryStringProperty<RideOffer>(_entities[4].properties[16]);
 
   /// See [RideOffer.isActive].
   static final isActive =
-      obx.QueryBooleanProperty<RideOffer>(_entities[1].properties[15]);
+      obx.QueryBooleanProperty<RideOffer>(_entities[4].properties[17]);
+
+  /// See [RideOffer.status].
+  static final status =
+      obx.QueryStringProperty<RideOffer>(_entities[4].properties[18]);
+
+  /// See [RideOffer.completedAt].
+  static final completedAt =
+      obx.QueryDateProperty<RideOffer>(_entities[4].properties[19]);
+
+  /// See [RideOffer.averageRating].
+  static final averageRating =
+      obx.QueryDoubleProperty<RideOffer>(_entities[4].properties[20]);
+
+  /// See [RideOffer.totalRatings].
+  static final totalRatings =
+      obx.QueryIntegerProperty<RideOffer>(_entities[4].properties[21]);
 }
 
 /// [UserProfile] entity fields to define ObjectBox queries.
 class UserProfile_ {
   /// See [UserProfile.id].
   static final id =
-      obx.QueryIntegerProperty<UserProfile>(_entities[2].properties[0]);
+      obx.QueryIntegerProperty<UserProfile>(_entities[5].properties[0]);
 
   /// See [UserProfile.userId].
   static final userId =
-      obx.QueryStringProperty<UserProfile>(_entities[2].properties[1]);
+      obx.QueryStringProperty<UserProfile>(_entities[5].properties[1]);
 
   /// See [UserProfile.name].
   static final name =
-      obx.QueryStringProperty<UserProfile>(_entities[2].properties[2]);
+      obx.QueryStringProperty<UserProfile>(_entities[5].properties[2]);
 
   /// See [UserProfile.email].
   static final email =
-      obx.QueryStringProperty<UserProfile>(_entities[2].properties[3]);
+      obx.QueryStringProperty<UserProfile>(_entities[5].properties[3]);
 
   /// See [UserProfile.phone].
   static final phone =
-      obx.QueryStringProperty<UserProfile>(_entities[2].properties[4]);
+      obx.QueryStringProperty<UserProfile>(_entities[5].properties[4]);
 
   /// See [UserProfile.bio].
   static final bio =
-      obx.QueryStringProperty<UserProfile>(_entities[2].properties[5]);
+      obx.QueryStringProperty<UserProfile>(_entities[5].properties[5]);
 
   /// See [UserProfile.profileImageUrl].
   static final profileImageUrl =
-      obx.QueryStringProperty<UserProfile>(_entities[2].properties[6]);
+      obx.QueryStringProperty<UserProfile>(_entities[5].properties[6]);
 
   /// See [UserProfile.createdAtTimestamp].
   static final createdAtTimestamp =
-      obx.QueryIntegerProperty<UserProfile>(_entities[2].properties[7]);
+      obx.QueryIntegerProperty<UserProfile>(_entities[5].properties[7]);
 
   /// See [UserProfile.ridesOffered].
   static final ridesOffered =
-      obx.QueryIntegerProperty<UserProfile>(_entities[2].properties[8]);
+      obx.QueryIntegerProperty<UserProfile>(_entities[5].properties[8]);
 
   /// See [UserProfile.ridesTaken].
   static final ridesTaken =
-      obx.QueryIntegerProperty<UserProfile>(_entities[2].properties[9]);
+      obx.QueryIntegerProperty<UserProfile>(_entities[5].properties[9]);
 
   /// See [UserProfile.rating].
   static final rating =
-      obx.QueryDoubleProperty<UserProfile>(_entities[2].properties[10]);
+      obx.QueryDoubleProperty<UserProfile>(_entities[5].properties[10]);
 
   /// See [UserProfile.rideNotifications].
   static final rideNotifications =
-      obx.QueryBooleanProperty<UserProfile>(_entities[2].properties[11]);
+      obx.QueryBooleanProperty<UserProfile>(_entities[5].properties[11]);
 
   /// See [UserProfile.chatNotifications].
   static final chatNotifications =
-      obx.QueryBooleanProperty<UserProfile>(_entities[2].properties[12]);
+      obx.QueryBooleanProperty<UserProfile>(_entities[5].properties[12]);
 
   /// See [UserProfile.emailNotifications].
   static final emailNotifications =
-      obx.QueryBooleanProperty<UserProfile>(_entities[2].properties[13]);
+      obx.QueryBooleanProperty<UserProfile>(_entities[5].properties[13]);
 
   /// See [UserProfile.createdAt].
   static final createdAt =
-      obx.QueryDateProperty<UserProfile>(_entities[2].properties[14]);
+      obx.QueryDateProperty<UserProfile>(_entities[5].properties[14]);
+}
+
+/// [Wallet] entity fields to define ObjectBox queries.
+class Wallet_ {
+  /// See [Wallet.id].
+  static final id =
+      obx.QueryIntegerProperty<Wallet>(_entities[6].properties[0]);
+
+  /// See [Wallet.userId].
+  static final userId =
+      obx.QueryStringProperty<Wallet>(_entities[6].properties[1]);
+
+  /// See [Wallet.balance].
+  static final balance =
+      obx.QueryDoubleProperty<Wallet>(_entities[6].properties[2]);
+
+  /// See [Wallet.currency].
+  static final currency =
+      obx.QueryStringProperty<Wallet>(_entities[6].properties[3]);
+
+  /// See [Wallet.isActive].
+  static final isActive =
+      obx.QueryBooleanProperty<Wallet>(_entities[6].properties[4]);
+
+  /// See [Wallet.createdAt].
+  static final createdAt =
+      obx.QueryDateProperty<Wallet>(_entities[6].properties[5]);
+
+  /// See [Wallet.updatedAt].
+  static final updatedAt =
+      obx.QueryDateProperty<Wallet>(_entities[6].properties[6]);
+}
+
+/// [WalletTransaction] entity fields to define ObjectBox queries.
+class WalletTransaction_ {
+  /// See [WalletTransaction.id].
+  static final id =
+      obx.QueryIntegerProperty<WalletTransaction>(_entities[7].properties[0]);
+
+  /// See [WalletTransaction.userId].
+  static final userId =
+      obx.QueryStringProperty<WalletTransaction>(_entities[7].properties[1]);
+
+  /// See [WalletTransaction.transactionId].
+  static final transactionId =
+      obx.QueryStringProperty<WalletTransaction>(_entities[7].properties[2]);
+
+  /// See [WalletTransaction.amount].
+  static final amount =
+      obx.QueryDoubleProperty<WalletTransaction>(_entities[7].properties[3]);
+
+  /// See [WalletTransaction.currency].
+  static final currency =
+      obx.QueryStringProperty<WalletTransaction>(_entities[7].properties[4]);
+
+  /// See [WalletTransaction.typeIndex].
+  static final typeIndex =
+      obx.QueryIntegerProperty<WalletTransaction>(_entities[7].properties[5]);
+
+  /// See [WalletTransaction.statusIndex].
+  static final statusIndex =
+      obx.QueryIntegerProperty<WalletTransaction>(_entities[7].properties[6]);
+
+  /// See [WalletTransaction.description].
+  static final description =
+      obx.QueryStringProperty<WalletTransaction>(_entities[7].properties[7]);
+
+  /// See [WalletTransaction.referenceId].
+  static final referenceId =
+      obx.QueryStringProperty<WalletTransaction>(_entities[7].properties[8]);
+
+  /// See [WalletTransaction.paymentMethod].
+  static final paymentMethod =
+      obx.QueryStringProperty<WalletTransaction>(_entities[7].properties[9]);
+
+  /// See [WalletTransaction.paymentGatewayId].
+  static final paymentGatewayId =
+      obx.QueryStringProperty<WalletTransaction>(_entities[7].properties[10]);
+
+  /// See [WalletTransaction.balanceBefore].
+  static final balanceBefore =
+      obx.QueryDoubleProperty<WalletTransaction>(_entities[7].properties[11]);
+
+  /// See [WalletTransaction.balanceAfter].
+  static final balanceAfter =
+      obx.QueryDoubleProperty<WalletTransaction>(_entities[7].properties[12]);
+
+  /// See [WalletTransaction.createdAt].
+  static final createdAt =
+      obx.QueryDateProperty<WalletTransaction>(_entities[7].properties[13]);
+
+  /// See [WalletTransaction.updatedAt].
+  static final updatedAt =
+      obx.QueryDateProperty<WalletTransaction>(_entities[7].properties[14]);
+
+  /// See [WalletTransaction.completedAt].
+  static final completedAt =
+      obx.QueryDateProperty<WalletTransaction>(_entities[7].properties[15]);
 }

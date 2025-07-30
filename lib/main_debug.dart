@@ -5,16 +5,15 @@ import 'package:mpitana/bloc/ride/ride_bloc.dart';
 import 'package:mpitana/bloc/theme/theme_bloc.dart';
 import 'package:mpitana/bloc/theme/theme_state.dart';
 import 'package:mpitana/bloc/wallet/wallet_bloc.dart';
-import 'package:mpitana/common/database/objectbox_db.dart';
 import 'package:mpitana/common/utils/colors.dart';
-import 'package:mpitana/screens/splash/splash_screen.dart';
+import 'package:mpitana/screens/auth/login_screen.dart';
 import 'package:mpitana/bloc/app_bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize ObjectBox
-  await ObjectBoxDb.instance;
+  // Skip ObjectBox initialization for debugging
+  // await ObjectBoxDb.instance;
   
   Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
@@ -44,7 +43,7 @@ class MyApp extends StatelessWidget {
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, themeState) {
           return MaterialApp(
-            home: SplashScreen(),// Show splash screen first
+            home: LoginPage(), // Skip splash screen and go directly to login
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
               colorScheme: lightColorScheme,

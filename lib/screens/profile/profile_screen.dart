@@ -8,6 +8,7 @@ import 'package:mpitana/bloc/theme/theme_event.dart';
 import 'package:mpitana/bloc/theme/theme_state.dart';
 import 'package:mpitana/screens/profile/models/user_profile.dart';
 import 'package:mpitana/screens/profile/edit_profile_screen.dart';
+import 'package:mpitana/common/widgets/user_ratings_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 
@@ -297,6 +298,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ],
                       ),
                     ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            
+            // Ratings Section
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Ratings & Reviews',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  UserRatingsWidget(
+                    userId: profile.id,
+                    showDetailedView: true,
+                  ),
                 ],
               ),
             ),
