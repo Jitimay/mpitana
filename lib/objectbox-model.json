@@ -232,10 +232,157 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:9009397057325655044",
+      "lastPropertyId": "10:6270782141272470632",
+      "name": "WalletBalance",
+      "properties": [
+        {
+          "id": "1:6511690648026436864",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5856654544698198230",
+          "name": "userId",
+          "type": 9,
+          "flags": 2048,
+          "indexId": "5:2267542533610752386"
+        },
+        {
+          "id": "3:6470032596804821122",
+          "name": "availableBalance",
+          "type": 8
+        },
+        {
+          "id": "4:4006526873687471184",
+          "name": "pendingBalance",
+          "type": 8
+        },
+        {
+          "id": "5:2852409565030797456",
+          "name": "totalBalance",
+          "type": 8
+        },
+        {
+          "id": "6:2018417979192642073",
+          "name": "lastUpdated",
+          "type": 10
+        },
+        {
+          "id": "7:636054847145401117",
+          "name": "createdAt",
+          "type": 10
+        },
+        {
+          "id": "8:3474634863035950171",
+          "name": "currency",
+          "type": 9
+        },
+        {
+          "id": "9:4454973195201076478",
+          "name": "isActive",
+          "type": 1
+        },
+        {
+          "id": "10:6270782141272470632",
+          "name": "isFrozen",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:4040997814787253175",
+      "lastPropertyId": "15:2022917438102400322",
+      "name": "WalletTransaction",
+      "properties": [
+        {
+          "id": "1:8815129717624048023",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3311037157489202225",
+          "name": "userId",
+          "type": 9
+        },
+        {
+          "id": "3:2662504802199985372",
+          "name": "amount",
+          "type": 8
+        },
+        {
+          "id": "4:8804275835718515750",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "5:4145238295865688103",
+          "name": "description",
+          "type": 9
+        },
+        {
+          "id": "6:1148458959062356786",
+          "name": "status",
+          "type": 9
+        },
+        {
+          "id": "7:3317589957053302885",
+          "name": "createdAt",
+          "type": 10,
+          "flags": 8,
+          "indexId": "6:1119642909420468569"
+        },
+        {
+          "id": "8:8621899989213159305",
+          "name": "completedAt",
+          "type": 10
+        },
+        {
+          "id": "9:7545717945539636120",
+          "name": "rideId",
+          "type": 9
+        },
+        {
+          "id": "10:5763979383276140083",
+          "name": "paymentMethod",
+          "type": 9
+        },
+        {
+          "id": "11:3630447607532963250",
+          "name": "transactionId",
+          "type": 9
+        },
+        {
+          "id": "12:7267998569419956255",
+          "name": "reference",
+          "type": 9
+        },
+        {
+          "id": "13:2965681924485524455",
+          "name": "fromLocation",
+          "type": 9
+        },
+        {
+          "id": "14:2358917781456495502",
+          "name": "toLocation",
+          "type": 9
+        },
+        {
+          "id": "15:2022917438102400322",
+          "name": "driverName",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:7015521020507013135",
-  "lastIndexId": "4:682870673175232116",
+  "lastEntityId": "5:4040997814787253175",
+  "lastIndexId": "6:1119642909420468569",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,

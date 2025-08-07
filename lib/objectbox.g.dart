@@ -17,6 +17,8 @@ import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 import 'screens/offerRide/models/location.dart';
 import 'screens/offerRide/models/ride_offer.dart';
 import 'screens/profile/models/user_profile.dart';
+import 'screens/wallet/models/wallet_balance.dart';
+import 'screens/wallet/models/wallet_transaction.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
 
@@ -246,6 +248,151 @@ final _entities = <obx_int.ModelEntity>[
             flags: 0)
       ],
       relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(4, 9009397057325655044),
+      name: 'WalletBalance',
+      lastPropertyId: const obx_int.IdUid(10, 6270782141272470632),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 6511690648026436864),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 5856654544698198230),
+            name: 'userId',
+            type: 9,
+            flags: 2048,
+            indexId: const obx_int.IdUid(5, 2267542533610752386)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 6470032596804821122),
+            name: 'availableBalance',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 4006526873687471184),
+            name: 'pendingBalance',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 2852409565030797456),
+            name: 'totalBalance',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 2018417979192642073),
+            name: 'lastUpdated',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 636054847145401117),
+            name: 'createdAt',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 3474634863035950171),
+            name: 'currency',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 4454973195201076478),
+            name: 'isActive',
+            type: 1,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(10, 6270782141272470632),
+            name: 'isFrozen',
+            type: 1,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
+      backlinks: <obx_int.ModelBacklink>[]),
+  obx_int.ModelEntity(
+      id: const obx_int.IdUid(5, 4040997814787253175),
+      name: 'WalletTransaction',
+      lastPropertyId: const obx_int.IdUid(15, 2022917438102400322),
+      flags: 0,
+      properties: <obx_int.ModelProperty>[
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(1, 8815129717624048023),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(2, 3311037157489202225),
+            name: 'userId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(3, 2662504802199985372),
+            name: 'amount',
+            type: 8,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(4, 8804275835718515750),
+            name: 'type',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(5, 4145238295865688103),
+            name: 'description',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(6, 1148458959062356786),
+            name: 'status',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(7, 3317589957053302885),
+            name: 'createdAt',
+            type: 10,
+            flags: 8,
+            indexId: const obx_int.IdUid(6, 1119642909420468569)),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(8, 8621899989213159305),
+            name: 'completedAt',
+            type: 10,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(9, 7545717945539636120),
+            name: 'rideId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(10, 5763979383276140083),
+            name: 'paymentMethod',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(11, 3630447607532963250),
+            name: 'transactionId',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(12, 7267998569419956255),
+            name: 'reference',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(13, 2965681924485524455),
+            name: 'fromLocation',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(14, 2358917781456495502),
+            name: 'toLocation',
+            type: 9,
+            flags: 0),
+        obx_int.ModelProperty(
+            id: const obx_int.IdUid(15, 2022917438102400322),
+            name: 'driverName',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <obx_int.ModelRelation>[],
       backlinks: <obx_int.ModelBacklink>[])
 ];
 
@@ -284,8 +431,8 @@ Future<obx.Store> openStore(
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
       entities: _entities,
-      lastEntityId: const obx_int.IdUid(3, 7015521020507013135),
-      lastIndexId: const obx_int.IdUid(4, 682870673175232116),
+      lastEntityId: const obx_int.IdUid(5, 4040997814787253175),
+      lastIndexId: const obx_int.IdUid(6, 1119642909420468569),
       lastRelationId: const obx_int.IdUid(0, 0),
       lastSequenceId: const obx_int.IdUid(0, 0),
       retiredEntityUids: const [],
@@ -528,6 +675,170 @@ obx_int.ModelDefinition getObjectBoxModel() {
                 const fb.Int64Reader().vTableGet(buffer, rootOffset, 18, 0);
 
           return object;
+        }),
+    WalletBalance: obx_int.EntityDefinition<WalletBalance>(
+        model: _entities[3],
+        toOneRelations: (WalletBalance object) => [],
+        toManyRelations: (WalletBalance object) => {},
+        getId: (WalletBalance object) => object.id,
+        setId: (WalletBalance object, int id) {
+          object.id = id;
+        },
+        objectToFB: (WalletBalance object, fb.Builder fbb) {
+          final userIdOffset = fbb.writeString(object.userId);
+          final currencyOffset = fbb.writeString(object.currency);
+          fbb.startTable(11);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, userIdOffset);
+          fbb.addFloat64(2, object.availableBalance);
+          fbb.addFloat64(3, object.pendingBalance);
+          fbb.addFloat64(4, object.totalBalance);
+          fbb.addInt64(5, object.lastUpdated.millisecondsSinceEpoch);
+          fbb.addInt64(6, object.createdAt.millisecondsSinceEpoch);
+          fbb.addOffset(7, currencyOffset);
+          fbb.addBool(8, object.isActive);
+          fbb.addBool(9, object.isFrozen);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final userIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final availableBalanceParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final pendingBalanceParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 10, 0);
+          final currencyParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 18, '');
+          final isActiveParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 20, false);
+          final isFrozenParam =
+              const fb.BoolReader().vTableGet(buffer, rootOffset, 22, false);
+          final object = WalletBalance(
+              userId: userIdParam,
+              availableBalance: availableBalanceParam,
+              pendingBalance: pendingBalanceParam,
+              currency: currencyParam,
+              isActive: isActiveParam,
+              isFrozen: isFrozenParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+            ..totalBalance =
+                const fb.Float64Reader().vTableGet(buffer, rootOffset, 12, 0)
+            ..lastUpdated = DateTime.fromMillisecondsSinceEpoch(
+                const fb.Int64Reader().vTableGet(buffer, rootOffset, 14, 0))
+            ..createdAt = DateTime.fromMillisecondsSinceEpoch(
+                const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0));
+
+          return object;
+        }),
+    WalletTransaction: obx_int.EntityDefinition<WalletTransaction>(
+        model: _entities[4],
+        toOneRelations: (WalletTransaction object) => [],
+        toManyRelations: (WalletTransaction object) => {},
+        getId: (WalletTransaction object) => object.id,
+        setId: (WalletTransaction object, int id) {
+          object.id = id;
+        },
+        objectToFB: (WalletTransaction object, fb.Builder fbb) {
+          final userIdOffset = fbb.writeString(object.userId);
+          final typeOffset = fbb.writeString(object.type);
+          final descriptionOffset = fbb.writeString(object.description);
+          final statusOffset = fbb.writeString(object.status);
+          final rideIdOffset =
+              object.rideId == null ? null : fbb.writeString(object.rideId!);
+          final paymentMethodOffset = object.paymentMethod == null
+              ? null
+              : fbb.writeString(object.paymentMethod!);
+          final transactionIdOffset = object.transactionId == null
+              ? null
+              : fbb.writeString(object.transactionId!);
+          final referenceOffset = object.reference == null
+              ? null
+              : fbb.writeString(object.reference!);
+          final fromLocationOffset = object.fromLocation == null
+              ? null
+              : fbb.writeString(object.fromLocation!);
+          final toLocationOffset = object.toLocation == null
+              ? null
+              : fbb.writeString(object.toLocation!);
+          final driverNameOffset = object.driverName == null
+              ? null
+              : fbb.writeString(object.driverName!);
+          fbb.startTable(16);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, userIdOffset);
+          fbb.addFloat64(2, object.amount);
+          fbb.addOffset(3, typeOffset);
+          fbb.addOffset(4, descriptionOffset);
+          fbb.addOffset(5, statusOffset);
+          fbb.addInt64(6, object.createdAt.millisecondsSinceEpoch);
+          fbb.addInt64(7, object.completedAt?.millisecondsSinceEpoch);
+          fbb.addOffset(8, rideIdOffset);
+          fbb.addOffset(9, paymentMethodOffset);
+          fbb.addOffset(10, transactionIdOffset);
+          fbb.addOffset(11, referenceOffset);
+          fbb.addOffset(12, fromLocationOffset);
+          fbb.addOffset(13, toLocationOffset);
+          fbb.addOffset(14, driverNameOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (obx.Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+          final completedAtValue =
+              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 18);
+          final userIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 6, '');
+          final amountParam =
+              const fb.Float64Reader().vTableGet(buffer, rootOffset, 8, 0);
+          final typeParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 10, '');
+          final descriptionParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 12, '');
+          final statusParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGet(buffer, rootOffset, 14, '');
+          final rideIdParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 20);
+          final paymentMethodParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 22);
+          final transactionIdParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 24);
+          final referenceParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 26);
+          final fromLocationParam =
+              const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 28);
+          final toLocationParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 30);
+          final driverNameParam = const fb.StringReader(asciiOptimization: true)
+              .vTableGetNullable(buffer, rootOffset, 32);
+          final object = WalletTransaction(
+              userId: userIdParam,
+              amount: amountParam,
+              type: typeParam,
+              description: descriptionParam,
+              status: statusParam,
+              rideId: rideIdParam,
+              paymentMethod: paymentMethodParam,
+              transactionId: transactionIdParam,
+              reference: referenceParam,
+              fromLocation: fromLocationParam,
+              toLocation: toLocationParam,
+              driverName: driverNameParam)
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0)
+            ..createdAt = DateTime.fromMillisecondsSinceEpoch(
+                const fb.Int64Reader().vTableGet(buffer, rootOffset, 16, 0))
+            ..completedAt = completedAtValue == null
+                ? null
+                : DateTime.fromMillisecondsSinceEpoch(completedAtValue);
+
+          return object;
         })
   };
 
@@ -697,4 +1008,110 @@ class UserProfile_ {
   /// See [UserProfile.createdAt].
   static final createdAt =
       obx.QueryDateProperty<UserProfile>(_entities[2].properties[14]);
+}
+
+/// [WalletBalance] entity fields to define ObjectBox queries.
+class WalletBalance_ {
+  /// See [WalletBalance.id].
+  static final id =
+      obx.QueryIntegerProperty<WalletBalance>(_entities[3].properties[0]);
+
+  /// See [WalletBalance.userId].
+  static final userId =
+      obx.QueryStringProperty<WalletBalance>(_entities[3].properties[1]);
+
+  /// See [WalletBalance.availableBalance].
+  static final availableBalance =
+      obx.QueryDoubleProperty<WalletBalance>(_entities[3].properties[2]);
+
+  /// See [WalletBalance.pendingBalance].
+  static final pendingBalance =
+      obx.QueryDoubleProperty<WalletBalance>(_entities[3].properties[3]);
+
+  /// See [WalletBalance.totalBalance].
+  static final totalBalance =
+      obx.QueryDoubleProperty<WalletBalance>(_entities[3].properties[4]);
+
+  /// See [WalletBalance.lastUpdated].
+  static final lastUpdated =
+      obx.QueryDateProperty<WalletBalance>(_entities[3].properties[5]);
+
+  /// See [WalletBalance.createdAt].
+  static final createdAt =
+      obx.QueryDateProperty<WalletBalance>(_entities[3].properties[6]);
+
+  /// See [WalletBalance.currency].
+  static final currency =
+      obx.QueryStringProperty<WalletBalance>(_entities[3].properties[7]);
+
+  /// See [WalletBalance.isActive].
+  static final isActive =
+      obx.QueryBooleanProperty<WalletBalance>(_entities[3].properties[8]);
+
+  /// See [WalletBalance.isFrozen].
+  static final isFrozen =
+      obx.QueryBooleanProperty<WalletBalance>(_entities[3].properties[9]);
+}
+
+/// [WalletTransaction] entity fields to define ObjectBox queries.
+class WalletTransaction_ {
+  /// See [WalletTransaction.id].
+  static final id =
+      obx.QueryIntegerProperty<WalletTransaction>(_entities[4].properties[0]);
+
+  /// See [WalletTransaction.userId].
+  static final userId =
+      obx.QueryStringProperty<WalletTransaction>(_entities[4].properties[1]);
+
+  /// See [WalletTransaction.amount].
+  static final amount =
+      obx.QueryDoubleProperty<WalletTransaction>(_entities[4].properties[2]);
+
+  /// See [WalletTransaction.type].
+  static final type =
+      obx.QueryStringProperty<WalletTransaction>(_entities[4].properties[3]);
+
+  /// See [WalletTransaction.description].
+  static final description =
+      obx.QueryStringProperty<WalletTransaction>(_entities[4].properties[4]);
+
+  /// See [WalletTransaction.status].
+  static final status =
+      obx.QueryStringProperty<WalletTransaction>(_entities[4].properties[5]);
+
+  /// See [WalletTransaction.createdAt].
+  static final createdAt =
+      obx.QueryDateProperty<WalletTransaction>(_entities[4].properties[6]);
+
+  /// See [WalletTransaction.completedAt].
+  static final completedAt =
+      obx.QueryDateProperty<WalletTransaction>(_entities[4].properties[7]);
+
+  /// See [WalletTransaction.rideId].
+  static final rideId =
+      obx.QueryStringProperty<WalletTransaction>(_entities[4].properties[8]);
+
+  /// See [WalletTransaction.paymentMethod].
+  static final paymentMethod =
+      obx.QueryStringProperty<WalletTransaction>(_entities[4].properties[9]);
+
+  /// See [WalletTransaction.transactionId].
+  static final transactionId =
+      obx.QueryStringProperty<WalletTransaction>(_entities[4].properties[10]);
+
+  /// See [WalletTransaction.reference].
+  static final reference =
+      obx.QueryStringProperty<WalletTransaction>(_entities[4].properties[11]);
+
+  /// See [WalletTransaction.fromLocation].
+  static final fromLocation =
+      obx.QueryStringProperty<WalletTransaction>(_entities[4].properties[12]);
+
+  /// See [WalletTransaction.toLocation].
+  static final toLocation =
+      obx.QueryStringProperty<WalletTransaction>(_entities[4].properties[13]);
+
+  /// See [WalletTransaction.driverName].
+  static final driverName =
+      obx.QueryStringProperty<WalletTransaction>(_entities[4].properties[14]);
 }

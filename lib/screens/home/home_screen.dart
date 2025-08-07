@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mpitana/screens/chat/chat_screen.dart';
 import 'package:mpitana/screens/chat/message/message_screen.dart';
-import 'package:mpitana/screens/chat/models/chat_model.dart';
 import 'package:mpitana/screens/findRideScreen/find_ride_screen.dart';
 import 'package:mpitana/screens/map/map_screen.dart';
 import 'package:mpitana/screens/offerRide/offer_ride_screen.dart';
 import 'package:mpitana/screens/profile/profile_screen.dart';
-import 'package:mpitana/screens/rides/rides_screen.dart'; // Import the new rides screen
+import 'package:mpitana/screens/rides/rides_screen.dart';
+import 'package:mpitana/screens/wallet/wallet_screen.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -44,8 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
     const FindRideScreen(),
     const OfferRideScreen(),
     const RidesScreen(),
+    const WalletScreen(),
     MessagesScreen(),
-    // ChatScreen(chatItem: ChatItem(name: 'John Doe', lastMessage: 'Hello, how are you?', time: '12:00 PM', profileImage: 'https://i.ibb.co/6rP1gQ3/burundi-flag-logo.png')),
     const ProfileScreen(),
   ];
 
@@ -250,16 +249,16 @@ class _HomeScreenState extends State<HomeScreen> {
           child: BottomNavigationBar(
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(_selectedIndex == 0 ? Icons.directions_car_filled : Icons.directions_car_outlined),
-                label: 'Find Ride',
+                icon: Icon(_selectedIndex == 0 ? Icons.search : Icons.search_outlined),
+                label: 'Find',
               ),
               BottomNavigationBarItem(
                 icon: Icon(_selectedIndex == 1 ? Icons.add_circle : Icons.add_circle_outline),
-                label: 'Offer Ride',
+                label: 'Offer',
               ),
               BottomNavigationBarItem(
-                icon: const SizedBox(width: 0), // Empty space for FAB
-                label: '',
+                icon: Icon(_selectedIndex == 2 ? Icons.account_balance_wallet : Icons.account_balance_wallet_outlined),
+                label: 'Wallet',
               ),
               BottomNavigationBarItem(
                 icon: Icon(_selectedIndex == 3 ? Icons.chat_bubble : Icons.chat_bubble_outline),
@@ -270,14 +269,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 label: 'Profile',
               ),
             ],
-            currentIndex: _selectedIndex == 2 ? 0 : _selectedIndex, // Handle the empty middle item
+            currentIndex: _selectedIndex >= 5 ? 4 : _selectedIndex, // Handle FAB navigation
             selectedItemColor: Theme.of(context).colorScheme.primary,
             unselectedItemColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
             onTap: (index) {
-              // Skip the middle item (index 2) as it's reserved for the FAB
-              if (index == 2) return;
-              
-              // Adjust index if it's greater than 2 (after the FAB)
               _onItemTapped(index);
             },
             type: BottomNavigationBarType.fixed,
@@ -312,7 +307,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: FloatingActionButton(
           onPressed: () {
-            _onItemTapped(2); // Navigate to RidesScreen when the FAB is pressed
+            _onItemTapped(5); // Navigate to RidesScreen when the FAB is pressed
           },
           backgroundColor: Colors.transparent,
           elevation: 0,

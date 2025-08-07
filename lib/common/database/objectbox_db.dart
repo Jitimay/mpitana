@@ -3,6 +3,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:mpitana/screens/offerRide/models/location.dart';
 import 'package:mpitana/screens/offerRide/models/ride_offer.dart';
 import 'package:mpitana/screens/profile/models/user_profile.dart';
+import 'package:mpitana/screens/wallet/models/wallet_balance.dart';
+import 'package:mpitana/screens/wallet/models/wallet_transaction.dart';
 import 'package:mpitana/objectbox.g.dart';
 
 class ObjectBoxDb {
@@ -31,6 +33,17 @@ class ObjectBoxDb {
   static Future<Box<RideOffer>> get rideOfferBox async {
     final store = await instance;
     return store.box<RideOffer>();
+  }
+  
+  // Wallet boxes
+  static Future<Box<WalletBalance>> get walletBalanceBox async {
+    final store = await instance;
+    return store.box<WalletBalance>();
+  }
+  
+  static Future<Box<WalletTransaction>> get walletTransactionBox async {
+    final store = await instance;
+    return store.box<WalletTransaction>();
   }
   
   // Helper methods for Location
@@ -149,5 +162,88 @@ class ObjectBoxDb {
       return box.remove(results.first.id);
     }
     return false;
+  }
+  
+  // Wallet Balance helper methods
+  static Future<int> saveWalletBalance(WalletBalance balance) async {
+    final box = await walletBalanceBox;
+    return box.put(balance);
+  }
+  
+  static Future<WalletBalance?> getWalletBalance(int id) async {
+    final box = await walletBalanceBox;
+    return box.get(id);
+  }
+  
+  static Future<WalletBalance?> getWalletBalanceByUserId(String userId) async {
+    final box = await walletBalanceBox;
+    final query = box.query(WalletBalance_.userId.equals(userId)).build();
+    final results = query.find();
+    query.close();
+    
+    if (results.isNotEmpty) {
+      return results.first;
+    }
+    return null;
+  }
+  
+  static Future<List<WalletBalance>> getAllWalletBalances() async {
+    final box = await walletBalanceBox;
+    return box.getAll();
+  }
+  
+  static Future<bool> deleteWalletBalance(int id) async {
+    final box = await walletBalanceBox;
+    return box.remove(id);
+  }
+  
+  // Wallet Transaction helper methods
+  static Future<int> saveWalletTransaction(WalletTransaction transaction) async {
+    final box = await walletTransactionBox;
+    return box.put(transaction);
+  }
+  
+  static Future<WalletTransaction?> getWalletTransaction(int id) async {
+    final box = await walletTransactionBox;
+    return box.get(id);
+  }
+  
+  static Future<List<WalletTransaction>> getWalletTransactionsByUserId(String userId) async {
+    final box = await walletTransactionBox;
+    final query = box.query(WalletTransaction_.userId.equals(userId))
+        .order(WalletTransaction_.createdAt, flags: Order.descending)
+        .build();
+    final results = query.find();
+    query.close();
+    return results;
+  }
+  
+  static Future<List<WalletTransaction>> getAllWalletTransactions() async {
+    final box = await walletTransactionBox;
+    return box.getAll();
+  }
+  
+  static Future<bool> deleteWalletTransaction(int id) async {
+    final box = await walletTransactionBox;
+    return box.remove(id);
+  }
+  
+  static Future<List<WalletTransaction>> getWalletTransactionsByDateRange(
+    String userId,
+    DateTime start,
+    DateTime end,
+  ) async {
+    final box = await walletTransactionBox;
+    final query = box.query(
+      WalletTransaction_.userId.equals(userId).and(
+        WalletTransaction_.createdAt.between(
+          start.millisecondsSinceEpoch,
+          end.millisecondsSinceEpoch,
+        ),
+      ),
+    ).order(WalletTransaction_.createdAt, flags: Order.descending).build();
+    final results = query.find();
+    query.close();
+    return results;
   }
 }

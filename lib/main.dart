@@ -4,6 +4,7 @@ import 'package:mpitana/bloc/profile/profile_bloc.dart';
 import 'package:mpitana/bloc/ride/ride_bloc.dart';
 import 'package:mpitana/bloc/theme/theme_bloc.dart';
 import 'package:mpitana/bloc/theme/theme_state.dart';
+import 'package:mpitana/bloc/wallet/wallet_bloc.dart';
 import 'package:mpitana/common/database/objectbox_db.dart';
 import 'package:mpitana/common/utils/colors.dart';
 import 'package:mpitana/screens/splash/splash_screen.dart';
@@ -34,6 +35,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ThemeBloc>(
           create: (context) => ThemeBloc(),
+        ),
+        BlocProvider<WalletBloc>(
+          create: (context) => WalletBloc(),
         ),
         // Add other BlocProviders here as needed
       ],
