@@ -4,7 +4,6 @@ import 'package:mpitana/screens/findRideScreen/find_ride_screen.dart';
 import 'package:mpitana/screens/map/map_screen.dart';
 import 'package:mpitana/screens/offerRide/offer_ride_screen.dart';
 import 'package:mpitana/screens/profile/profile_screen.dart';
-import 'package:mpitana/screens/rides/rides_screen.dart';
 import 'package:mpitana/screens/wallet/wallet_screen.dart';
 
 
@@ -42,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _widgetOptions = <Widget>[
     const FindRideScreen(),
     const OfferRideScreen(),
-    const RidesScreen(),
     const WalletScreen(),
     MessagesScreen(),
     const ProfileScreen(),
@@ -283,42 +281,42 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      floatingActionButton: Container(
-        height: 65,
-        width: 65,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Theme.of(context).colorScheme.primary,
-              Theme.of(context).colorScheme.secondary,
-            ],
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-              spreadRadius: 1,
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: FloatingActionButton(
-          onPressed: () {
-            _onItemTapped(5); // Navigate to RidesScreen when the FAB is pressed
-          },
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          child: Icon(
-            Icons.directions_car_filled,
-            color: Theme.of(context).colorScheme.onPrimary,
-            size: 30,
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: Container(
+      //   height: 65,
+      //   width: 65,
+      //   decoration: BoxDecoration(
+      //     shape: BoxShape.circle,
+      //     gradient: LinearGradient(
+      //       begin: Alignment.topLeft,
+      //       end: Alignment.bottomRight,
+      //       colors: [
+      //         Theme.of(context).colorScheme.primary,
+      //         Theme.of(context).colorScheme.secondary,
+      //       ],
+      //     ),
+      //     boxShadow: [
+      //       BoxShadow(
+      //         color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+      //         spreadRadius: 1,
+      //         blurRadius: 8,
+      //         offset: const Offset(0, 4),
+      //       ),
+      //     ],
+      //   ),
+      //   child: FloatingActionButton(
+      //     onPressed: () {
+      //       _onItemTapped(5); // Navigate to RidesScreen when the FAB is pressed
+      //     },
+      //     backgroundColor: Colors.transparent,
+      //     elevation: 0,
+      //     child: Icon(
+      //       Icons.directions_car_filled,
+      //       color: Theme.of(context).colorScheme.onPrimary,
+      //       size: 30,
+      //     ),
+      //   ),
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
