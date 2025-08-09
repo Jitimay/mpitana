@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mpitana/screens/chat/message/message_screen.dart';
 import 'package:mpitana/screens/findRideScreen/find_ride_screen.dart';
 import 'package:mpitana/screens/map/map_screen.dart';
 import 'package:mpitana/screens/offerRide/offer_ride_screen.dart';
 import 'package:mpitana/screens/profile/profile_screen.dart';
 import 'package:mpitana/screens/wallet/wallet_screen.dart';
+import 'package:mpitana/bloc/ride/ride_bloc.dart';
+import 'package:mpitana/bloc/ride/ride_state.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -54,180 +57,32 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background, // Use background color from theme
-      body: _selectedIndex == 0
-          ? SingleChildScrollView(
-      child: Column(
-        children: [
-          const SizedBox(height: 70),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 10,
-                height: 10,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(context).colorScheme.primary, // Use primary color from theme
-                ),
-              ),
-              const SizedBox(width: 5),
-              Container(
-                width: 10,
-                height: 10,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4), // Use onSurface with opacity for inactive dots
-                ),
-              ),
-              const SizedBox(width: 5),
-              Container(
-                width: 10,
-                height: 10,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.4), // Use onSurface with opacity for inactive dots
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          // Search Bar
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Column(
-                      children: [
-                        TextField(
-                          controller: _departureController,
-                          decoration: InputDecoration(
-                            hintText: 'Departure',
-                            hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)), // Added hintStyle
-                            prefixIcon: Icon(Icons.location_on, color: Theme.of(context).colorScheme.onSurface), // Use onSurface color for icon
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                              borderSide: BorderSide(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)), // Add a visible border
-                            ),
-                            filled: true,
-                            fillColor: Theme.of(context).colorScheme.surface, // Use surface color from theme
-                          ),
-                          style: TextStyle(color: Theme.of(context).colorScheme.onSurface), // Set text color
-                        ),
-                        const SizedBox(height: 15),
-                        TextField(
-                          controller: _destinationController,
-                          decoration: InputDecoration(
-                            hintText: 'Destination',
-                            hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)), // Added hintStyle
-                            prefixIcon: Icon(Icons.location_on, color: Theme.of(context).colorScheme.onSurface), // Use onSurface color for icon
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                              borderSide: BorderSide(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)), // Add a visible border
-                            ),
-                            filled: true,
-                            fillColor: Theme.of(context).colorScheme.surface, // Use surface color from theme
-                          ),
-                          style: TextStyle(color: Theme.of(context).colorScheme.onSurface), // Set text color
-                        ),
-                        const SizedBox(height: 15),
-                        TextField(
-                          controller: _dateTimeController,
-                          decoration: InputDecoration(
-                            hintText: 'Date and Time',
-                            hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)), // Added hintStyle
-                            prefixIcon: Icon(Icons.calendar_today, color: Theme.of(context).colorScheme.onSurface), // Use onSurface color for icon
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                              borderSide: BorderSide(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)), // Add a visible border
-                            ),
-                            filled: true,
-                            fillColor: Theme.of(context).colorScheme.surface, // Use surface color from theme
-                          ),
-                          style: TextStyle(color: Theme.of(context).colorScheme.onSurface), // Set text color
-                          readOnly: true, // Make it read-only so a date picker can be used
-                          onTap: () async {
-                            final DateTime? pickedDate = await showDatePicker(
-                              context: context,
-                              initialDate: _selectedDate ?? DateTime.now(),
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2101),
-                            );
-                            if (pickedDate != null) {
-                              final TimeOfDay? pickedTime = await showTimePicker(
-                                context: context,
-                                initialTime: _selectedTime ?? TimeOfDay.now(),
-                              );
-                              if (pickedTime != null) {
-                                setState(() {
-                                  _selectedDate = pickedDate;
-                                  _selectedTime = pickedTime;
-                                  _dateTimeController.text = "${_selectedDate!.toLocal().toString().split(' ')[0]} ${_selectedTime!.format(context)}";
-                                });
-                              }
-                            }
-                          },
-                        ),
-                        const SizedBox(height: 15),
-                        TextField(
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            hintText: 'Number of Seats',
-                            hintStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)), // Added hintStyle
-                            prefixIcon: Icon(Icons.event_seat, color: Theme.of(context).colorScheme.onSurface), // Use onSurface color for icon
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                              borderSide: BorderSide(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)), // Add a visible border
-                            ),
-                            filled: true,
-                            fillColor: Theme.of(context).colorScheme.surface, // Use surface color from theme
-                          ),
-                          style: TextStyle(color: Theme.of(context).colorScheme.onSurface), // Set text color
-                        ),
-                      ],
-            ),
-          ),
-          const SizedBox(height: 15),
-          // Offer Ride Button
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
+    return BlocListener<RideBloc, RideState>(
+      listener: (context, state) {
+        if (state is RideCreated) {
+          // Automatically switch to Find tab when a ride is created
+          setState(() {
+            _selectedIndex = 0; // Switch to Find tab (index 0)
+          });
+          // Show a snackbar to inform the user
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Ride posted! Check the Find tab to see your ride.'),
+              action: SnackBarAction(
+                label: 'View',
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MapScreen(
-                        departure: _departureController.text,
-                        destination: _destinationController.text,
-                      ),
-                    ),
-                  );
+                  setState(() {
+                    _selectedIndex = 0;
+                  });
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary, // Use primary color from theme
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                ),
-                child: Text('Find Ride', style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onPrimary)),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          // Map Section
-          SizedBox(
-            height: 300,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: MapScreen(departure: _departureController.text, destination: _destinationController.text,),
-          ),
-          )
-        ],
-      ),
-            )
-          : _widgetOptions[_selectedIndex],
+          );
+        }
+      },
+      child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background, // Use background color from theme
+        body: _widgetOptions[_selectedIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -317,6 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //   ),
       // ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-    );
+    ), // End of Scaffold
+    ); // End of BlocListener
   }
 }

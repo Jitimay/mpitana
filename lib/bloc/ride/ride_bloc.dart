@@ -13,6 +13,7 @@ class RideBloc extends Bloc<RideEvent, RideState> {
   RideBloc() : super(RideInitial()) {
     _initializeObjectBox();
     on<LoadRidesEvent>(_onLoadRides);
+    on<LoadAvailableRides>(_onLoadAvailableRides);
     on<CreateRideOfferEvent>(_onCreateRideOffer);
     on<SearchRidesEvent>(_onSearchRides);
     on<BookRideEvent>(_onBookRide);
@@ -37,6 +38,32 @@ class RideBloc extends Bloc<RideEvent, RideState> {
       emit(RideLoaded(rides: rides));
     } catch (e) {
       emit(RideError(message: 'Failed to load rides: ${e.toString()}'));
+    }
+  }
+
+  Future<void> _onLoadAvailableRides(LoadAvailableRides event, Emitter<RideState> emit) async {
+    emit(RideLoading());
+    
+    try {
+      if (_rideOfferBox == null) {
+        _store = await ObjectBoxDb.instance;
+        _rideOfferBox = _store!.box<RideOffer>();
+      }
+      
+      // Get all rides and filter for active ones with available seats
+      final allRides = _rideOfferBox!.getAll();
+      final availableRides = allRides.where((ride) => 
+        ride.isActive && 
+        ride.availableSeats > 0 && 
+        ride.dateTime.isAfter(DateTime.now())
+      ).toList();
+      
+      // Sort by date/time
+      availableRides.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+      
+      emit(RideLoaded(rides: availableRides));
+    } catch (e) {
+      emit(RideError(message: 'Failed to load available rides: ${e.toString()}'));
     }
   }
 
@@ -70,9 +97,18 @@ class RideBloc extends Bloc<RideEvent, RideState> {
 
       emit(RideCreated(ride: rideOffer));
       
-      // Also emit updated list
-      final rides = _rideOfferBox!.getAll();
-      emit(RideLoaded(rides: rides));
+      // Emit updated available rides list (filtered)
+      final allRides = _rideOfferBox!.getAll();
+      final availableRides = allRides.where((ride) => 
+        ride.isActive && 
+        ride.availableSeats > 0 && 
+        ride.dateTime.isAfter(DateTime.now())
+      ).toList();
+      
+      // Sort by date/time
+      availableRides.sort((a, b) => a.dateTime.compareTo(b.dateTime));
+      
+      emit(RideLoaded(rides: availableRides));
     } catch (e) {
       emit(RideError(message: 'Failed to create ride offer: ${e.toString()}'));
     }

@@ -37,7 +37,7 @@ class _AddMoneyDialogState extends State<AddMoneyDialog> {
     },
   ];
 
-  final List<double> _quickAmounts = [10.0, 25.0, 50.0, 100.0];
+  final List<double> _quickAmounts = [5000.0, 10000.0, 25000.0, 50000.0];
 
   @override
   void dispose() {
@@ -103,7 +103,7 @@ class _AddMoneyDialogState extends State<AddMoneyDialog> {
                 ],
                 decoration: InputDecoration(
                   hintText: '0.00',
-                  prefixText: '\$ ',
+                  prefixText: 'BIF ',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -120,11 +120,11 @@ class _AddMoneyDialogState extends State<AddMoneyDialog> {
                   if (amount == null || amount <= 0) {
                     return 'Please enter a valid amount';
                   }
-                  if (amount < 1) {
-                    return 'Minimum amount is \$1.00';
+                  if (amount < 1000) {
+                    return 'Minimum amount is BIF 1,000';
                   }
-                  if (amount > 1000) {
-                    return 'Maximum amount is \$1000.00';
+                  if (amount > 1000000) {
+                    return 'Maximum amount is BIF 1,000,000';
                   }
                   return null;
                 },
@@ -144,9 +144,9 @@ class _AddMoneyDialogState extends State<AddMoneyDialog> {
                 spacing: 8,
                 children: _quickAmounts.map((amount) {
                   return ActionChip(
-                    label: Text('\$${amount.toStringAsFixed(0)}'),
+                    label: Text('BIF ${amount.toStringAsFixed(0)}'),
                     onPressed: () {
-                      _amountController.text = amount.toStringAsFixed(2);
+                      _amountController.text = amount.toStringAsFixed(0);
                     },
                     backgroundColor: colorScheme.primaryContainer,
                     labelStyle: TextStyle(
@@ -231,7 +231,7 @@ class _AddMoneyDialogState extends State<AddMoneyDialog> {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Successfully added \$${amount.toStringAsFixed(2)} to your wallet'),
+            content: Text('Successfully added BIF ${amount.toStringAsFixed(0)} to your wallet'),
             backgroundColor: Colors.green,
           ),
         );

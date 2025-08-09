@@ -6,6 +6,7 @@ import 'package:mpitana/bloc/wallet/wallet_state.dart';
 import 'package:mpitana/screens/wallet/widgets/balance_card.dart';
 import 'package:mpitana/screens/wallet/widgets/transaction_card.dart';
 import 'package:mpitana/screens/wallet/widgets/add_money_dialog.dart';
+import 'package:mpitana/screens/wallet/transaction_history_screen.dart';
 
 class WalletScreen extends StatefulWidget {
   const WalletScreen({super.key});
@@ -213,16 +214,25 @@ class _WalletScreenState extends State<WalletScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Recent Transactions',
-                          style: theme.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
+                        Expanded(
+                          child: Text(
+                            'Recent Transactions',
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         TextButton(
                           onPressed: () {
-                            // TODO: Navigate to full transaction history
-                            _showComingSoonDialog('Full Transaction History');
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => TransactionHistoryScreen(
+                                  userId: _currentUserId,
+                                  initialTransactions: transactions,
+                                ),
+                              ),
+                            );
                           },
                           child: const Text('View All'),
                         ),
@@ -265,13 +275,54 @@ class _WalletScreenState extends State<WalletScreen> {
                   SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        final transaction = transactions[index];
-                        return TransactionCard(
-                          transaction: transaction,
-                          onTap: () => _showTransactionDetails(transaction),
-                        );
+                        final recentTransactions = transactions.take(3).toList();
+                        if (index < recentTransactions.length) {
+                          final transaction = recentTransactions[index];
+                          return TransactionCard(
+                            transaction: transaction,
+                            onTap: () => _showTransactionDetails(transaction),
+                          );
+                        } else {
+                          // Show "View More" card if there are more transactions
+                          return Card(
+                            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => TransactionHistoryScreen(
+                                      userId: _currentUserId,
+                                      initialTransactions: transactions,
+                                    ),
+                                  ),
+                                );
+                              },
+                              borderRadius: BorderRadius.circular(8),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.expand_more,
+                                      color: theme.colorScheme.primary,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Text(
+                                      'View ${transactions.length - 3} more transactions',
+                                      style: theme.textTheme.bodyMedium?.copyWith(
+                                        color: theme.colorScheme.primary,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }
                       },
-                      childCount: transactions.length,
+                      childCount: transactions.length > 3 ? 4 : transactions.length,
                     ),
                   ),
                 

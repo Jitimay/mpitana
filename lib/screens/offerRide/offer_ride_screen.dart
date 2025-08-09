@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geocoding/geocoding.dart' hide Location;
 import 'package:mpitana/screens/offerRide/location_picker_screen.dart';
@@ -8,6 +9,9 @@ import 'package:mpitana/screens/offerRide/services/location_service.dart';
 import 'package:mpitana/screens/offerRide/services/directions_service.dart';
 import 'package:mpitana/common/database/objectbox_db.dart';
 import 'package:mpitana/common/widgets/enhanced_route_map_widget.dart';
+import 'package:mpitana/bloc/ride/ride_bloc.dart';
+import 'package:mpitana/bloc/ride/ride_event.dart';
+import 'package:mpitana/bloc/ride/ride_state.dart';
 
 class OfferRideScreen extends StatefulWidget {
   const OfferRideScreen({super.key});
@@ -52,7 +56,7 @@ class _OfferRideScreenState extends State<OfferRideScreen> {
   @override
   void initState() {
     super.initState();
-    _priceController.text = "0.00";
+    _priceController.text = "5000";
   }
 
   @override
@@ -201,7 +205,7 @@ Future<void> _showRouteOnMap() async {
       _isLoading = false;
     });
 
-    _priceController.text = (_distance * 0.5).toStringAsFixed(2);
+    _priceController.text = (_distance * 1000).toStringAsFixed(0);
 
     if (directionsResult['isFallback'] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -302,7 +306,8 @@ Future<void> _selectTime(BuildContext context) async {
         _selectedTime.minute,
       );
 
-      final rideOffer = RideOffer(
+      // Use BLoC to create ride offer
+      context.read<RideBloc>().add(CreateRideOfferEvent(
         departureLat: _departureLocation!.latitude,
         departureLng: _departureLocation!.longitude,
         destinationLat: _destinationLocation!.latitude,
@@ -316,32 +321,14 @@ Future<void> _selectTime(BuildContext context) async {
         // You would typically get these from user authentication
         driverName: 'Current User',
         driverId: 'user_id',
-      );
+        vehicleInfo: 'Toyota Camry', // You can add vehicle info input field
+      ));
 
-      final id = await ObjectBoxDb.saveRideOffer(rideOffer);
-      
-      if (id > 0) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Ride offer posted successfully!')),
-          );
-          Navigator.popUntil(context, (route) => route.isFirst);
-        }
-      } else {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Failed to post ride offer')),
-          );
-        }
-      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error: $e')),
         );
-      }
-    } finally {
-      if (mounted) {
         setState(() {
           _isLoading = false;
         });
@@ -351,14 +338,32 @@ Future<void> _selectTime(BuildContext context) async {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Offer a Ride'),
-        elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-      ),
-      body: Stack(
+    return BlocListener<RideBloc, RideState>(
+      listener: (context, state) {
+        if (state is RideCreated) {
+          setState(() {
+            _isLoading = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Ride offer posted successfully!')),
+          );
+          // Navigate back to home and switch to Find tab to see the new ride
+          Navigator.popUntil(context, (route) => route.isFirst);
+        } else if (state is RideError) {
+          setState(() {
+            _isLoading = false;
+          });
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error: ${state.message}')),
+          );
+        } else if (state is RideLoading) {
+          setState(() {
+            _isLoading = true;
+          });
+        }
+      },
+      child: Scaffold(
+        body: Stack(
         children: [
           SingleChildScrollView(
             controller: _scrollController,
@@ -369,6 +374,17 @@ Future<void> _selectTime(BuildContext context) async {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Title
+                    const Padding(
+                      padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
+                      child: Text(
+                        'Offer a Ride',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                     // Header
                     const Text(
                       'Where are you going?',
@@ -655,7 +671,7 @@ Future<void> _selectTime(BuildContext context) async {
                           
                           // Price
                           const Text(
-                            'Price per passenger',
+                            'Price per passenger (BIF)',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
@@ -667,7 +683,7 @@ Future<void> _selectTime(BuildContext context) async {
                             controller: _priceController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              labelText: 'Price',
+                              labelText: 'Price (BIF)',
                               prefixIcon: const Icon(Icons.attach_money),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8),
@@ -766,9 +782,10 @@ Future<void> _selectTime(BuildContext context) async {
                 child: CircularProgressIndicator(),
               ),
             ),
-        ],
-      ),
-    );
+        ], // End of Stack children
+      ), // End of Stack
+    ), // End of Scaffold
+    ); // End of BlocListener
   }
 
   Widget _buildLocationCard({

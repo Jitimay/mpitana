@@ -2,6 +2,8 @@ abstract class RideEvent {}
 
 class LoadRidesEvent extends RideEvent {}
 
+class LoadAvailableRides extends RideEvent {}
+
 class CreateRideOfferEvent extends RideEvent {
   final String from;
   final String to;

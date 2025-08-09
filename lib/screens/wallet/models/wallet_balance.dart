@@ -22,7 +22,7 @@ class WalletBalance {
   late DateTime createdAt;
   
   // Currency (for future multi-currency support)
-  String currency = 'USD';
+  String currency = 'BIF';
   
   // Status
   bool isActive = true;
@@ -32,7 +32,7 @@ class WalletBalance {
     required this.userId,
     this.availableBalance = 0.0,
     this.pendingBalance = 0.0,
-    this.currency = 'USD',
+    this.currency = 'BIF',
     this.isActive = true,
     this.isFrozen = false,
   }) {

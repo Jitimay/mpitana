@@ -66,10 +66,13 @@ class TransactionCard extends StatelessWidget {
                         ),
                         if (transaction.reference != null) ...[
                           const SizedBox(width: 8),
-                          Text(
-                            '• ${transaction.reference}',
-                            style: theme.textTheme.bodySmall?.copyWith(
-                              color: colorScheme.onSurface.withOpacity(0.6),
+                          Flexible(
+                            child: Text(
+                              '• ${transaction.reference}',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: colorScheme.onSurface.withOpacity(0.6),
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
@@ -82,6 +85,7 @@ class TransactionCard extends StatelessWidget {
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurface.withOpacity(0.6),
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ],
