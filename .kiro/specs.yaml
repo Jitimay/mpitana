@@ -1,0 +1,89 @@
+app: Mpitana
+description: Flutter-based ride-sharing app for Burundi
+
+entities:
+  - name: User
+    fields:
+      - id: int
+      - name: string
+      - email: string
+      - phone: string
+      - role: enum [driver, passenger]
+      - walletBalance: double
+
+  - name: Ride
+    fields:
+      - id: int
+      - origin: string
+      - destination: string
+      - time: datetime
+      - price: double
+      - status: enum [pending, accepted, completed, cancelled]
+      - passengerId: int
+      - driverId: int
+
+  - name: WalletTransaction
+    fields:
+      - id: int
+      - userId: int
+      - amount: double
+      - type: enum [credit, debit]
+      - timestamp: datetime
+
+  - name: Message
+    fields:
+      - id: int
+      - senderId: int
+      - receiverId: int
+      - content: string
+      - timestamp: datetime
+
+  - name: Location
+    fields:
+      - id: int
+      - latitude: double
+      - longitude: double
+      - address: string
+
+flows:
+  - name: AuthenticationFlow
+    steps:
+      - input: User credentials
+      - action: Validate credentials
+      - output: Authenticated User session
+
+  - name: OfferRide
+    steps:
+      - input: Driver + Ride details
+      - action: Create Ride with status=pending
+      - output: Ride object
+
+  - name: FindRide
+    steps:
+      - input: Passenger + Location
+      - action: Search matching rides
+      - output: List of Ride objects
+
+  - name: AcceptRide
+    steps:
+      - input: Driver
+      - action: Update Ride status=accepted
+      - output: Updated Ride
+
+  - name: CompleteRide
+    steps:
+      - input: Ride
+      - action: Update Ride status=completed
+      - output: Finalized Ride + Wallet transactions
+
+  - name: WalletTopUp
+    steps:
+      - input: User + Amount
+      - action: Add credit to wallet
+      - output: WalletTransaction
+
+  - name: Messaging
+    steps:
+      - input: Message content
+      - action: Store message
+      - output: Sent Message
