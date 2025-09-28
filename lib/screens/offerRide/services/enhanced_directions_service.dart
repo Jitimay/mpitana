@@ -21,11 +21,19 @@ class EnhancedDirectionsService {
       debugPrint('=== DIRECTIONS SERVICE DEBUG ===');
       debugPrint('API Key available: ${_apiKey.isNotEmpty}');
       debugPrint('API Key length: ${_apiKey.length}');
+      debugPrint('API Key format valid: ${_apiKey.startsWith('AIza')}');
       debugPrint('Getting directions between: ${origin.latitude},${origin.longitude} and ${destination.latitude},${destination.longitude}');
 
       // Validate API key
       if (_apiKey.isEmpty) {
-        debugPrint('ERROR: API key is empty!');
+        debugPrint('❌ ERROR: API key is empty!');
+        debugPrint('💡 SOLUTION: Add your Google Maps API key to lib/common/config/maps_config.dart');
+        return _getFallbackStraightLine(origin, destination);
+      }
+
+      if (!_apiKey.startsWith('AIza')) {
+        debugPrint('❌ ERROR: API key format is invalid!');
+        debugPrint('💡 SOLUTION: Ensure your API key starts with "AIza"');
         return _getFallbackStraightLine(origin, destination);
       }
 
@@ -248,13 +256,31 @@ class EnhancedDirectionsService {
             'rawRouteData': primaryRoute, // Include raw data for advanced usage
           };
         } else {
-          debugPrint('Error from Google Directions API: ${data['status']}');
+          debugPrint('❌ Error from Google Directions API: ${data['status']}');
           if (data.containsKey('error_message')) {
-            debugPrint('Error message: ${data['error_message']}');
+            debugPrint('❌ Error message: ${data['error_message']}');
           }
           if (data.containsKey('available_travel_modes')) {
             debugPrint('Available travel modes: ${data['available_travel_modes']}');
           }
+          
+          // Provide specific troubleshooting advice
+          switch (data['status']) {
+            case 'REQUEST_DENIED':
+              debugPrint('💡 SOLUTION: Check if Directions API is enabled in Google Cloud Console');
+              debugPrint('💡 SOLUTION: Verify API key restrictions and billing');
+              break;
+            case 'OVER_QUERY_LIMIT':
+              debugPrint('💡 SOLUTION: API quota exceeded - check Google Cloud Console');
+              break;
+            case 'ZERO_RESULTS':
+              debugPrint('💡 SOLUTION: No route found between these locations');
+              break;
+            case 'INVALID_REQUEST':
+              debugPrint('💡 SOLUTION: Check if coordinates are valid');
+              break;
+          }
+          
           return {'isFallback': true};
         }
       } else {

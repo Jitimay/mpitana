@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mpitana/screens/chat/message/message_screen.dart';
 import 'package:mpitana/screens/findRideScreen/find_ride_screen.dart';
-import 'package:mpitana/screens/map/map_screen.dart';
 import 'package:mpitana/screens/offerRide/offer_ride_screen.dart';
 import 'package:mpitana/screens/profile/profile_screen.dart';
 import 'package:mpitana/screens/wallet/wallet_screen.dart';
 import 'package:mpitana/bloc/ride/ride_bloc.dart';
 import 'package:mpitana/bloc/ride/ride_state.dart';
+import 'package:mpitana/common/utils/debug_utils.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -19,27 +19,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  DateTime? _selectedDate;
-  TimeOfDay? _selectedTime;
-  late TextEditingController _dateTimeController;
-  late TextEditingController _departureController;
-  late TextEditingController _destinationController;
-
-  @override
-  void initState() {
-    super.initState();
-    _dateTimeController = TextEditingController();
-    _departureController = TextEditingController();
-    _destinationController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _dateTimeController.dispose();
-    _departureController.dispose();
-    _destinationController.dispose();
-    super.dispose();
-  }
 
   final List<Widget> _widgetOptions = <Widget>[
     const FindRideScreen(),
@@ -81,14 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background, // Use background color from theme
+        backgroundColor: Theme.of(context).colorScheme.surface, // Use surface color from theme
         body: _widgetOptions[_selectedIndex],
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              // ignore: deprecated_member_use
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 15,
               offset: const Offset(0, -10),
             ),
@@ -124,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
             currentIndex: _selectedIndex >= 5 ? 4 : _selectedIndex, // Handle FAB navigation
             selectedItemColor: Theme.of(context).colorScheme.primary,
-            unselectedItemColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+            unselectedItemColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
             onTap: (index) {
               _onItemTapped(index);
             },
@@ -136,42 +114,16 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      // floatingActionButton: Container(
-      //   height: 65,
-      //   width: 65,
-      //   decoration: BoxDecoration(
-      //     shape: BoxShape.circle,
-      //     gradient: LinearGradient(
-      //       begin: Alignment.topLeft,
-      //       end: Alignment.bottomRight,
-      //       colors: [
-      //         Theme.of(context).colorScheme.primary,
-      //         Theme.of(context).colorScheme.secondary,
-      //       ],
-      //     ),
-      //     boxShadow: [
-      //       BoxShadow(
-      //         color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-      //         spreadRadius: 1,
-      //         blurRadius: 8,
-      //         offset: const Offset(0, 4),
-      //       ),
-      //     ],
-      //   ),
-      //   child: FloatingActionButton(
-      //     onPressed: () {
-      //       _onItemTapped(5); // Navigate to RidesScreen when the FAB is pressed
-      //     },
-      //     backgroundColor: Colors.transparent,
-      //     elevation: 0,
-      //     child: Icon(
-      //       Icons.directions_car_filled,
-      //       color: Theme.of(context).colorScheme.onPrimary,
-      //       size: 30,
-      //     ),
-      //   ),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Stack(
+        children: [
+          // Debug FAB (only in debug mode)
+          Positioned(
+            bottom: 80,
+            right: 0,
+            child: DebugUtils.buildDebugFab(context),
+          ),
+        ],
+      ),
     ), // End of Scaffold
     ); // End of BlocListener
   }

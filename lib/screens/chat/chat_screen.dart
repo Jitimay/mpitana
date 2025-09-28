@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mpitana/screens/chat/message/message.dart';
 import 'package:mpitana/screens/chat/models/chat_model.dart';
-import 'package:mpitana/screens/chat/models/message_model.dart';
+import 'package:mpitana/screens/chat/models/message_model.dart' as UI;
+import 'simple_message_service.dart' as Service;
 
 class ChatScreen extends StatefulWidget {
   final ChatItem chatItem;
@@ -14,37 +15,39 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
-  final List<Message> _messages = [
-    Message(
-      text: "Hi, good to see you! We're starting work on a presentation for a new product today, right?",
-      time: "8:34 PM",
-      isMe: true,
-    ),
-    Message(
-      text: "Yes, that's right. Let's discuss the main points and structure of the presentation",
-      time: "8:35 PM",
-      isMe: false,
-      senderName: "Katy",
-    ),
-    Message(
-      text: "",
-      time: "8:40 PM",
-      isMe: true,
-      isVoiceMessage: true,
-      voiceDuration: "1:04",
-    ),
-    Message(
-      text: "Okay, then let's divide the presentation into a few main sections: introduction, product description, features and benefits, use cases, and conclusion",
-      time: "8:42 PM",
-      isMe: false,
-      senderName: "Katy",
-    ),
-    Message(
-      text: "It's a deal",
-      time: "8:54 PM",
-      isMe: true,
-    ),
-  ];
+  List<UI.Message> _messages = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMessages();
+  }
+
+  void _loadMessages() async {
+    final messages = await Service.SimpleMessageService.getMessages();
+    setState(() {
+      _messages = messages
+          .map((msg) => UI.Message(
+                text: msg.text,
+                time:
+                    "${msg.timestamp.hour}:${msg.timestamp.minute.toString().padLeft(2, '0')}",
+                isMe: msg.senderId == 'current_user',
+              ))
+          .toList();
+    });
+  }
+
+  void _sendMessage() async {
+    if (_messageController.text.trim().isEmpty) return;
+
+    await Service.SimpleMessageService.sendMessage(
+      _messageController.text.trim(),
+      widget.chatItem.name,
+    );
+
+    _messageController.clear();
+    _loadMessages();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -164,8 +167,8 @@ class _ChatScreenState extends State<ChatScreen> {
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.mic, color: Color(0xFF8E8E93)),
-            onPressed: () {},
+            icon: Icon(Icons.send, color: Color(0xFF007AFF)),
+            onPressed: _sendMessage,
           ),
         ],
       ),
